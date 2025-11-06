@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { List, X } from "phosphor-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -7,31 +6,50 @@ const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navLinks = [
-    { name: "Home", path: "/" },
-    { name: "About", path: "/about" },
-    { name: "FAQ", path: "/faq" },
-    { name: "Contact", path: "/contact" },
+    { name: "Home", path: "#home" },
+    { name: "About", path: "#about" },
+    { name: "FAQ", path: "#faq" },
+    { name: "Contact", path: "#contact" },
   ];
+
+  const scrollToSection = (hash: string) => {
+    setIsOpen(false);
+    const element = document.querySelector(hash);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 glass">
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="text-2xl font-semibold text-gradient">
+          <a
+            href="#home"
+            onClick={(e) => {
+              e.preventDefault();
+              scrollToSection("#home");
+            }}
+            className="text-2xl font-semibold text-gradient cursor-pointer"
+          >
             SchoolHub AI
-          </Link>
+          </a>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <Link
+              <a
                 key={link.path}
-                to={link.path}
-                className="text-foreground/80 hover:text-foreground transition-colors duration-200"
+                href={link.path}
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection(link.path);
+                }}
+                className="text-foreground/80 hover:text-foreground transition-colors duration-200 cursor-pointer"
               >
                 {link.name}
-              </Link>
+              </a>
             ))}
           </div>
 
@@ -70,14 +88,17 @@ const Navigation = () => {
             >
               <div className="flex flex-col gap-6 p-8">
                 {navLinks.map((link) => (
-                  <Link
+                  <a
                     key={link.path}
-                    to={link.path}
-                    onClick={() => setIsOpen(false)}
-                    className="text-foreground/80 hover:text-foreground transition-colors duration-200 text-lg"
+                    href={link.path}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      scrollToSection(link.path);
+                    }}
+                    className="text-foreground/80 hover:text-foreground transition-colors duration-200 text-lg cursor-pointer"
                   >
                     {link.name}
-                  </Link>
+                  </a>
                 ))}
               </div>
             </motion.div>

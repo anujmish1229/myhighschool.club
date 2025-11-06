@@ -1,7 +1,13 @@
-import { Link } from "react-router-dom";
 import { EnvelopeSimple, Phone, MapPin, GithubLogo, TwitterLogo, LinkedinLogo } from "phosphor-react";
 
 const Footer = () => {
+  const scrollToSection = (hash: string) => {
+    const element = document.querySelector(hash);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   return (
     <footer className="glass mt-24">
       <div className="container mx-auto px-6 py-12">
@@ -44,18 +50,46 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-medium mb-4">Quick Links</h4>
             <div className="flex flex-col gap-3">
-              <Link to="/" className="text-foreground/70 hover:text-foreground transition-colors">
+              <a
+                href="#home"
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection("#home");
+                }}
+                className="text-foreground/70 hover:text-foreground transition-colors cursor-pointer"
+              >
                 Home
-              </Link>
-              <Link to="/about" className="text-foreground/70 hover:text-foreground transition-colors">
+              </a>
+              <a
+                href="#about"
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection("#about");
+                }}
+                className="text-foreground/70 hover:text-foreground transition-colors cursor-pointer"
+              >
                 About
-              </Link>
-              <Link to="/faq" className="text-foreground/70 hover:text-foreground transition-colors">
+              </a>
+              <a
+                href="#faq"
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection("#faq");
+                }}
+                className="text-foreground/70 hover:text-foreground transition-colors cursor-pointer"
+              >
                 FAQ
-              </Link>
-              <Link to="/contact" className="text-foreground/70 hover:text-foreground transition-colors">
+              </a>
+              <a
+                href="#contact"
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection("#contact");
+                }}
+                className="text-foreground/70 hover:text-foreground transition-colors cursor-pointer"
+              >
                 Contact
-              </Link>
+              </a>
             </div>
           </div>
 
