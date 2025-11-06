@@ -1,61 +1,104 @@
 import { useEffect, useRef } from "react";
+import * as am5 from "@amcharts/amcharts5";
+import * as am5map from "@amcharts/amcharts5/map";
+import am5geodata_worldLow from "@amcharts/amcharts5-geodata/worldLow";
+import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 
 const RotatingEarth = () => {
-  const earthRef = useRef<HTMLDivElement>(null);
+  const chartRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const earth = earthRef.current;
-    if (!earth) return;
+    if (!chartRef.current) return;
 
-    let rotation = 0;
-    const animate = () => {
-      rotation += 0.2;
-      earth.style.transform = `rotateY(${rotation}deg)`;
-      requestAnimationFrame(animate);
+    // Create root element
+    const root = am5.Root.new(chartRef.current);
+
+    // Set themes
+    root.setThemes([am5themes_Animated.new(root)]);
+
+    // Create the map chart
+    const chart = root.container.children.push(
+      am5map.MapChart.new(root, {
+        panX: "rotateX",
+        panY: "rotateY",
+        projection: am5map.geoOrthographic(),
+        paddingBottom: 0,
+        paddingTop: 0,
+        paddingLeft: 0,
+        paddingRight: 0,
+      })
+    );
+
+    // Create main polygon series for countries
+    const polygonSeries = chart.series.push(
+      am5map.MapPolygonSeries.new(root, {
+        geoJSON: am5geodata_worldLow,
+      })
+    );
+
+    // Style polygons
+    polygonSeries.mapPolygons.template.setAll({
+      fill: am5.color(0x4da6ff),
+      fillOpacity: 0.8,
+      strokeWidth: 0.5,
+      stroke: am5.color(0x66b3ff),
+    });
+
+    // Add hover effect
+    polygonSeries.mapPolygons.template.states.create("hover", {
+      fill: am5.color(0x66b3ff),
+      fillOpacity: 1,
+    });
+
+    // Create background series for graticules (grid lines)
+    const backgroundSeries = chart.series.unshift(
+      am5map.MapPolygonSeries.new(root, {})
+    );
+
+    backgroundSeries.mapPolygons.template.setAll({
+      fill: am5.color(0x1a2b3d),
+      fillOpacity: 0.3,
+      strokeOpacity: 0,
+    });
+
+    backgroundSeries.data.push({
+      geometry: am5map.getGeoRectangle(90, 180, -90, -180),
+    });
+
+    // Add graticule series for grid lines
+    const graticuleSeries = chart.series.push(
+      am5map.GraticuleSeries.new(root, {})
+    );
+
+    graticuleSeries.mapLines.template.setAll({
+      stroke: am5.color(0x4da6ff),
+      strokeOpacity: 0.15,
+    });
+
+    // Enable rotation animation
+    chart.animate({
+      key: "rotationX",
+      from: 0,
+      to: 360,
+      duration: 60000,
+      loops: Infinity,
+    });
+
+    // Make stuff animate on load
+    chart.appear(1000, 100);
+
+    return () => {
+      root.dispose();
     };
-
-    animate();
   }, []);
 
   return (
-    <div className="relative w-full h-full flex items-center justify-center perspective-1000">
-      <div className="absolute inset-0 flex items-center justify-center">
-        {/* Earth sphere */}
-        <div
-          ref={earthRef}
-          className="w-96 h-96 rounded-full relative preserve-3d"
-          style={{
-            background: `
-              radial-gradient(circle at 30% 30%, hsl(210 100% 65%) 0%, hsl(195 100% 50%) 30%, hsl(220 80% 40%) 70%, hsl(220 60% 20%) 100%)
-            `,
-            boxShadow: `
-              inset -40px -40px 80px rgba(0, 0, 0, 0.5),
-              0 0 100px hsla(210, 100%, 65%, 0.3),
-              0 0 200px hsla(195, 100%, 60%, 0.2)
-            `,
-          }}
-        >
-          {/* Continents overlay */}
-          <div
-            className="absolute inset-0 rounded-full opacity-20"
-            style={{
-              background: `
-                radial-gradient(ellipse at 20% 50%, transparent 30%, hsl(120 40% 30%) 31%, transparent 35%),
-                radial-gradient(ellipse at 70% 40%, transparent 25%, hsl(120 40% 30%) 26%, transparent 30%),
-                radial-gradient(ellipse at 50% 70%, transparent 35%, hsl(120 40% 30%) 36%, transparent 40%)
-              `,
-            }}
-          />
-        </div>
-
-        {/* Glow effect */}
-        <div
-          className="absolute w-96 h-96 rounded-full blur-3xl opacity-30 animate-pulse"
-          style={{
-            background: "radial-gradient(circle, hsl(210 100% 65%) 0%, transparent 70%)",
-          }}
-        />
-      </div>
+    <div className="relative w-full h-full flex items-center justify-center">
+      <div
+        ref={chartRef}
+        className="w-full h-full min-h-[500px]"
+        style={{ maxWidth: "600px", maxHeight: "600px" }}
+      />
     </div>
   );
 };
