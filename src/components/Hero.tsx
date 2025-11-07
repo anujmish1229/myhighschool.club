@@ -1,21 +1,12 @@
-import { useState } from "react";
-import { MagnifyingGlass } from "phosphor-react";
 import { motion } from "framer-motion";
 import RotatingEarth from "./RotatingEarth";
-import { Button } from "./ui/button";
+import SchoolSearch from "./SchoolSearch";
 
 const Hero = () => {
-  const [searchQuery, setSearchQuery] = useState("");
-
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Searching for:", searchQuery);
-  };
-
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
       {/* Background Earth */}
-      <div className="absolute inset-0 opacity-20">
+      <div className="absolute inset-0 opacity-20 pointer-events-none">
         <RotatingEarth />
       </div>
 
@@ -25,7 +16,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-center max-w-4xl mx-auto"
+          className="text-center max-w-4xl mx-auto relative z-20"
         >
           {/* Hook */}
           <motion.h1
@@ -44,34 +35,18 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-xl md:text-2xl text-foreground/70 mb-12"
           >
-            AI-powered websites that bring your school clubs to life
-          </motion.p>
+            AI-powered websites that bring your school clubs to life 
+          </motion.p> 
 
           {/* Search Bar */}
-          <motion.form
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            onSubmit={handleSearch}
-            className="max-w-2xl mx-auto mb-4"
+            className="mb-4 relative z-30"
           >
-            <div className="glass rounded-2xl p-2 flex items-center gap-3">
-              <MagnifyingGlass size={24} weight="light" className="text-foreground/50 ml-3" />
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search for your school..."
-                className="flex-1 bg-transparent border-none outline-none text-foreground placeholder:text-foreground/40 text-lg"
-              />
-              <Button
-                type="submit"
-                className="neumorphic glow bg-primary hover:bg-primary/90 text-primary-foreground font-medium px-8 py-3 rounded-xl transition-all duration-300"
-              >
-                Search
-              </Button>
-            </div>
-          </motion.form>
+            <SchoolSearch />
+          </motion.div>
 
           <motion.p
             initial={{ opacity: 0 }}
@@ -79,7 +54,7 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.8 }}
             className="text-foreground/50 text-sm"
           >
-            Find your school
+            Find your Ontario high school
           </motion.p>
         </motion.div>
       </div>

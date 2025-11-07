@@ -1,22 +1,41 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { List, X } from "phosphor-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isHomePage = location.pathname === "/";
 
-  const navLinks = [
+  const homeNavLinks = [
     { name: "Home", path: "#home" },
     { name: "About", path: "#about" },
     { name: "FAQ", path: "#faq" },
     { name: "Contact", path: "#contact" },
   ];
 
+  const schoolNavLinks = [
+    { name: "Home", path: "#home" },
+    { name: "Clubs", path: "#clubs" },
+    { name: "Events", path: "#events" },
+    { name: "Resources", path: "#resources" },
+  ];
+
+  const navLinks = isHomePage ? homeNavLinks : schoolNavLinks;
+
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location.pathname]);
+
   const scrollToSection = (hash: string) => {
     setIsOpen(false);
     const element = document.querySelector(hash);
     if (element) {
       element.scrollIntoView({ behavior: "smooth", block: "start" });
+    } else if (!isHomePage) {
+      navigate("/");
     }
   };
 
@@ -26,10 +45,14 @@ const Navigation = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <a
-            href="#home"
+            href={isHomePage ? "#home" : "/"}
             onClick={(e) => {
               e.preventDefault();
-              scrollToSection("#home");
+              if (isHomePage) {
+                scrollToSection("#home");
+              } else {
+                navigate("/");
+              }
             }}
             className="text-2xl font-semibold text-gradient cursor-pointer"
           >
