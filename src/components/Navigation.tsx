@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { List, X } from "phosphor-react";
+import { List, X, LockKey } from "phosphor-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -8,6 +8,7 @@ const Navigation = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const isHomePage = location.pathname === "/";
+  const isAdminPage = location.pathname.startsWith("/login") || location.pathname.startsWith("/dashboard") || location.pathname.startsWith("/edit");
 
   const homeNavLinks = [
     { name: "Home", path: "#home" },
@@ -61,7 +62,7 @@ const Navigation = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
+            {!isAdminPage && navLinks.map((link) => (
               <a
                 key={link.path}
                 href={link.path}
@@ -74,6 +75,15 @@ const Navigation = () => {
                 {link.name}
               </a>
             ))}
+            {!isAdminPage && (
+              <button
+                onClick={() => navigate('/login')}
+                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary/10 hover:bg-primary/20 text-primary transition-colors duration-200"
+              >
+                <LockKey size={18} weight="duotone" />
+                <span>Admin</span>
+              </button>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -110,7 +120,7 @@ const Navigation = () => {
               className="fixed right-0 top-[72px] bottom-0 w-64 glass md:hidden"
             >
               <div className="flex flex-col gap-6 p-8">
-                {navLinks.map((link) => (
+                {!isAdminPage && navLinks.map((link) => (
                   <a
                     key={link.path}
                     href={link.path}
@@ -123,6 +133,18 @@ const Navigation = () => {
                     {link.name}
                   </a>
                 ))}
+                {!isAdminPage && (
+                  <button
+                    onClick={() => {
+                      setIsOpen(false);
+                      navigate('/login');
+                    }}
+                    className="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary/10 hover:bg-primary/20 text-primary transition-colors duration-200 text-lg"
+                  >
+                    <LockKey size={20} weight="duotone" />
+                    <span>Admin Login</span>
+                  </button>
+                )}
               </div>
             </motion.div>
           </>
