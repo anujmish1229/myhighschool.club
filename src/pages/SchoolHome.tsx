@@ -3,12 +3,53 @@ import { getSchoolBySlug } from "@/data/ontarioSchools";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { House, UsersThree, Calendar, Book } from "phosphor-react";
+import { House, UsersThree, Calendar, Book, Sparkle } from "phosphor-react";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabase";
+
+interface Club {
+  id: string;
+  club_slug: string;
+  config: {
+    clubName: string;
+    clubTagline: string;
+    primaryColor: string;
+    accentColor: string;
+  };
+}
 
 const SchoolHome = () => {
   const { schoolSlug } = useParams<{ schoolSlug: string }>();
   const school = schoolSlug ? getSchoolBySlug(schoolSlug) : undefined;
+  const [clubs, setClubs] = useState<Club[]>([]);
+  const [loadingClubs, setLoadingClubs] = useState(true);
+
+  useEffect(() => {
+    const fetchClubs = async () => {
+      if (!schoolSlug) return;
+      
+      setLoadingClubs(true);
+      try {
+        const { data, error } = await supabase
+          .from('schools')
+          .select('id, club_slug, config')
+          .eq('high_school_slug', schoolSlug);
+
+        if (error) {
+          console.error('Error fetching clubs:', error);
+        } else {
+          setClubs(data || []);
+        }
+      } catch (error) {
+        console.error('Error fetching clubs:', error);
+      } finally {
+        setLoadingClubs(false);
+      }
+    };
+
+    fetchClubs();
+  }, [schoolSlug]);
 
   if (!school) {
     return (
@@ -68,31 +109,57 @@ const SchoolHome = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
         >
-          <div className="glass rounded-2xl p-8 hover:glow transition-all duration-300 text-center">
-            <House size={48} weight="light" className="mx-auto mb-4 text-primary" />
-            <h3 className="text-xl font-semibold mb-2">Home</h3>
-            <p className="text-foreground/60 text-sm">School information</p>
-          </div>
+          <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center">
+            Our <span className="text-gradient">Clubs</span>
+          </h2>
 
-          <div className="glass rounded-2xl p-8 hover:glow transition-all duration-300 text-center">
-            <UsersThree size={48} weight="light" className="mx-auto mb-4 text-primary" />
-            <h3 className="text-xl font-semibold mb-2">Clubs</h3>
-            <p className="text-foreground/60 text-sm">Coming soon</p>
-          </div>
-
-          <div className="glass rounded-2xl p-8 hover:glow transition-all duration-300 text-center">
-            <Calendar size={48} weight="light" className="mx-auto mb-4 text-primary" />
-            <h3 className="text-xl font-semibold mb-2">Events</h3>
-            <p className="text-foreground/60 text-sm">Coming soon</p>
-          </div>
-
-          <div className="glass rounded-2xl p-8 hover:glow transition-all duration-300 text-center">
-            <Book size={48} weight="light" className="mx-auto mb-4 text-primary" />
-            <h3 className="text-xl font-semibold mb-2">Resources</h3>
-            <p className="text-foreground/60 text-sm">Coming soon</p>
-          </div>
+          {loadingClubs ? (
+            <div className="text-center py-12">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+              <p className="text-foreground/70">Loading clubs...</p>
+            </div>
+          ) : clubs.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {clubs.map((club, index) => (
+                <motion.div
+                  key={club.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  <Link to={`/${schoolSlug}/${club.club_slug}`}>
+                    <div className="glass rounded-2xl p-8 hover:glow transition-all duration-300 text-center cursor-pointer group">
+                      <div 
+                        className="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center"
+                        style={{ backgroundColor: `${club.config.primaryColor}20` }}
+                      >
+                        <Sparkle size={32} weight="duotone" style={{ color: club.config.primaryColor }} />
+                      </div>
+                      <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">
+                        {club.config.clubName}
+                      </h3>
+                      <p className="text-foreground/60 text-sm">{club.config.clubTagline}</p>
+                      <div className="mt-4 text-primary text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                        Visit Club →
+                      </div>
+                    </div>
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12">
+              <UsersThree size={64} weight="light" className="mx-auto mb-4 text-foreground/40" />
+              <h3 className="text-2xl font-semibold mb-2">No Clubs Yet</h3>
+              <p className="text-foreground/60 mb-6">
+                Be the first to create a club for {school?.name}!
+              </p>
+              <Link to="/login">
+                <Button>Create a Club</Button>
+              </Link>
+            </div>
+          )}
         </motion.div>
       </section>
 
