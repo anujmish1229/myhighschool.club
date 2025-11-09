@@ -48,14 +48,20 @@ const Hero = () => {
             <SchoolSearch />
           </motion.div>
 
-          <motion.p
+          <motion.button
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="text-foreground/50 text-sm mb-8"
+            className="text-foreground/50 text-sm underline underline-offset-4 transition hover:text-foreground/70"
+            onClick={() => {
+              const contactSection = document.querySelector('#contact');
+              if (contactSection) {
+                contactSection.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
           >
-            Find your Ontario high school
-          </motion.p>
+            School not here? Request it to be added.
+          </motion.button>
 
         </motion.div>
       </div>

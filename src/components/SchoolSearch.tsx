@@ -46,11 +46,13 @@ const SchoolSearch = () => {
   return (
     <div className="relative w-full max-w-2xl mx-auto z-50" ref={dropdownRef} style={{ pointerEvents: 'auto' }}>
       <div className="relative">
-        <MagnifyingGlass
-          size={24}
-          weight="light"
-          className="absolute left-4 top-1/2 -translate-y-1/2 text-foreground/50 pointer-events-none z-10"
-        />
+        <div className="pointer-events-none absolute left-3 top-1/2 z-30 -translate-y-1/2 rounded-full bg-background/70 px-1.5 py-1.5 shadow-[0_8px_18px_-12px_rgba(59,130,246,0.65)]">
+          <MagnifyingGlass
+            size={20}
+            weight="duotone"
+            className="text-primary"
+          />
+        </div>
         <input
           type="text"
           value={query}
@@ -63,7 +65,7 @@ const SchoolSearch = () => {
             }
           }}
           placeholder="Search for your Ontario high school..."
-          className="w-full bg-background/80 backdrop-blur-sm border-2 border-border/50 rounded-2xl pl-14 pr-6 py-4 text-lg text-foreground placeholder:text-foreground/40 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all shadow-lg relative z-20"
+          className="w-full bg-background/80 backdrop-blur-sm border-2 border-border/50 rounded-2xl pl-16 pr-6 py-4 text-lg text-foreground placeholder:text-foreground/40 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all shadow-lg relative z-20"
           style={{ pointerEvents: 'auto' }}
         />
       </div>
