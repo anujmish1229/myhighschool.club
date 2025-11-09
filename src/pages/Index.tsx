@@ -45,8 +45,8 @@ const Index = () => {
 
   const faqs = [
     {
-      question: "What is SchoolHub AI?",
-      answer: "SchoolHub AI is an AI-powered platform that helps high schools create beautiful, professional websites for their clubs and activities. We handle all the technical details so you can focus on building community.",
+      question: "What is myhighschool.club?",
+      answer: "myhighschool.club is an AI-powered platform that helps high schools create beautiful, professional websites for their clubs and activities. We handle all the technical details so you can focus on building community.",
     },
     {
       question: "How does the AI technology work?",
@@ -66,7 +66,7 @@ const Index = () => {
     },
     {
       question: "Is there a free trial?",
-      answer: "Yes! We offer a 30-day free trial with full access to all features. No credit card required. Experience the difference SchoolHub AI can make for your school.",
+      answer: "Yes! We offer a 30-day free trial with full access to all features. No credit card required. Experience the difference myhighschool.club can make for your school.",
     },
   ];
 
@@ -100,7 +100,7 @@ const Index = () => {
           className="max-w-4xl mx-auto"
         >
           <h2 className="text-5xl md:text-6xl font-bold mb-8 text-center">
-            About <span className="text-gradient">SchoolHub AI</span>
+            About <span className="text-gradient">myhighschool.club</span>
           </h2>
 
           <div className="glass rounded-3xl p-8 md:p-12 mb-16">
@@ -110,7 +110,7 @@ const Index = () => {
               school communities thrive.
             </p>
             <p className="text-xl text-foreground/80 leading-relaxed">
-              Founded by educators and technologists, SchoolHub AI understands the unique challenges
+              Founded by educators and technologists, myhighschool.club understands the unique challenges
               schools face in engaging students. Our platform makes it effortless to build beautiful,
               functional websites that students, parents, and staff love to use.
             </p>
@@ -151,7 +151,7 @@ const Index = () => {
           </h2>
 
           <p className="text-xl text-foreground/70 text-center mb-16">
-            Everything you need to know about SchoolHub AI
+            Everything you need to know about myhighschool.club
           </p>
 
           <div className="glass rounded-3xl p-8 md:p-12">
@@ -281,7 +281,7 @@ const Index = () => {
           <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
             <div className="glass rounded-2xl p-6">
               <EnvelopeSimple size={32} weight="light" className="mx-auto mb-3 text-primary" />
-              <p className="text-sm text-foreground/70">hello@schoolhub.ai</p>
+              <p className="text-sm text-foreground/70">hello@myhighschool.club</p>
             </div>
             <div className="glass rounded-2xl p-6">
               <ChatCircleText size={32} weight="light" className="mx-auto mb-3 text-primary" />

@@ -14,7 +14,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {/* Brand */}
           <div>
-            <h3 className="text-2xl font-semibold text-gradient mb-4">SchoolHub AI</h3>
+            <h3 className="text-2xl font-semibold text-gradient mb-4">myhighschool.club</h3>
             <p className="text-foreground/70 mb-6">
               Empowering schools with AI-powered club websites
             </p>
@@ -99,7 +99,7 @@ const Footer = () => {
             <div className="flex flex-col gap-3">
               <div className="flex items-center gap-3 text-foreground/70">
                 <EnvelopeSimple size={20} weight="light" />
-                <span>hello@schoolhub.ai</span>
+                <span>hello@myhighschool.club</span>
               </div>
               <div className="flex items-center gap-3 text-foreground/70">
                 <Phone size={20} weight="light" />
@@ -107,14 +107,14 @@ const Footer = () => {
               </div>
               <div className="flex items-center gap-3 text-foreground/70">
                 <MapPin size={20} weight="light" />
-                <span>San Francisco, CA</span>
+                <span>Toronto, Ontario</span>
               </div>
             </div>
           </div>
         </div>
 
         <div className="border-t border-border/50 mt-12 pt-8 text-center text-foreground/60">
-          <p>&copy; {new Date().getFullYear()} SchoolHub AI. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} myhighschool.club. All rights reserved.</p>
         </div>
       </div>
     </footer>

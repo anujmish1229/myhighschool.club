@@ -1,13 +1,8 @@
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
 import RotatingEarth from "./RotatingEarth";
 import SchoolSearch from "./SchoolSearch";
-import { Button } from "./ui/button";
-import { LockKey } from "@phosphor-icons/react";
 
 const Hero = () => {
-  const navigate = useNavigate();
-
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
       {/* Background Earth */}
@@ -40,8 +35,8 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-xl md:text-2xl text-foreground/70 mb-12"
           >
-            AI-powered websites that bring your school clubs to life 
-          </motion.p> 
+            AI-powered websites that bring your school clubs to life aa
+          </motion.p>  
 
           {/* Search Bar */}
           <motion.div
@@ -62,23 +57,6 @@ const Hero = () => {
             Find your Ontario high school
           </motion.p>
 
-          {/* Admin Login Button */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1 }}
-            className="relative z-30"
-          >
-            <Button
-              onClick={() => navigate('/login')}
-              variant="outline"
-              size="lg"
-              className="gap-2"
-            >
-              <LockKey size={20} weight="duotone" />
-              Admin Login
-            </Button>
-          </motion.div>
         </motion.div>
       </div>
 
