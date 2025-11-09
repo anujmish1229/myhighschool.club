@@ -276,22 +276,6 @@ const Index = () => {
               </Button>
             </form>
           </div>
-
-          {/* Contact Info */}
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-            <div className="glass rounded-2xl p-6">
-              <EnvelopeSimple size={32} weight="light" className="mx-auto mb-3 text-primary" />
-              <p className="text-sm text-foreground/70">hello@myhighschool.club</p>
-            </div>
-            <div className="glass rounded-2xl p-6">
-              <ChatCircleText size={32} weight="light" className="mx-auto mb-3 text-primary" />
-              <p className="text-sm text-foreground/70">Live Chat Available</p>
-            </div>
-            <div className="glass rounded-2xl p-6">
-              <User size={32} weight="light" className="mx-auto mb-3 text-primary" />
-              <p className="text-sm text-foreground/70">24/7 Support</p>
-            </div>
-          </div>
         </motion.div>
       </section>
 
