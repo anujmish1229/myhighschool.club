@@ -180,7 +180,7 @@ const SchoolHome = () => {
               community spotlights will appear here with dates, details, and RSVP links.
             </p>
             <p className="text-lg text-foreground/70 leading-relaxed">
-              Want your event featured? Reach out to your club advisor or the SchoolHub AI team to get
+              Want your event featured? Reach out to your club advisor or the myhighschool.club team to get
               on the calendar.
             </p>
           </div>
@@ -201,7 +201,7 @@ const SchoolHome = () => {
             </h2>
             <p className="text-lg text-foreground/70 leading-relaxed mb-6">
               Welcome to the official digital hub for {school.name}. Downloadable assets, advisor
-              guides, and student onboarding materials will live here as we roll out SchoolHub AI across
+              guides, and student onboarding materials will live here as we roll out myhighschool.club across
               campus.
             </p>
             <p className="text-lg text-foreground/70 leading-relaxed">

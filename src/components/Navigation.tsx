@@ -55,9 +55,15 @@ const Navigation = () => {
                 navigate("/");
               }
             }}
-            className="text-2xl font-semibold text-gradient cursor-pointer"
+            className="flex items-center gap-3 text-2xl font-semibold text-gradient cursor-pointer"
           >
-            SchoolHub AI
+            <img
+              src="/logo.png"
+              alt="myhighschool.club icon"
+              className="h-8 w-8 rounded-lg shadow-md"
+              loading="lazy"
+            />
+            <span>myhighschool.club</span>
           </a>
 
           {/* Desktop Navigation */}
