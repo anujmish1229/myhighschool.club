@@ -27,8 +27,12 @@ export const ConfigProvider = ({ children }: { children: ReactNode }) => {
 
   const loadSchoolConfig = useCallback(async (slug: string): Promise<boolean> => {
     setLoading(true);
+    // Reset all state to ensure clean load
     setTemplateId(undefined);
     setTemplateName(undefined);
+    setConfig(defaultConfig);
+    setIsConfigured(false);
+    
     try {
       // slug can be either "school-slug/club-slug" or just "club-slug" (for backwards compatibility)
       const slugParts = slug.split('/');
@@ -51,6 +55,11 @@ export const ConfigProvider = ({ children }: { children: ReactNode }) => {
       }
 
       if (data) {
+        console.log('📦 Club data loaded:', { 
+          slug: `${data.high_school_slug}/${data.club_slug}`,
+          templateId: data.template_id 
+        });
+        
         setConfig(data.config);
         setSchoolSlug(`${data.high_school_slug}/${data.club_slug}`);
         setSchoolId(data.id);
@@ -68,11 +77,13 @@ export const ConfigProvider = ({ children }: { children: ReactNode }) => {
               console.error('Error loading template metadata:', templateError);
             }
 
+            console.log('🎨 Template loaded:', templateData?.name);
             setTemplateName(templateData?.name);
           } catch (templateLookupError) {
             console.error('Unexpected error loading template metadata:', templateLookupError);
           }
         } else {
+          console.log('🎨 No template assigned, using default');
           setTemplateName(undefined);
         }
 
