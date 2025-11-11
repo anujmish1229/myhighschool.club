@@ -54,7 +54,7 @@ const Index = () => {
     },
     {
       question: "How long does it take to set up?",
-      answer: "Most schools can have their first club website live in under 24 hours. Our streamlined process and AI automation mean you spend less time on setup and more time engaging with your community.",
+      answer: "Most schools can have their first club website live in SECONDS. Our streamlined process and AI automation mean you spend less time on setup and more time engaging with your community.",
     },
     {
       question: "Can we customize our club websites?",
@@ -65,8 +65,8 @@ const Index = () => {
       answer: "We provide comprehensive support including documentation, video tutorials, live chat, and dedicated account managers for enterprise clients. Our team is committed to your success.",
     },
     {
-      question: "Is there a free trial?",
-      answer: "Yes! We offer a 30-day free trial with full access to all features. No credit card required. Experience the difference myhighschool.club can make for your school.",
+      question: "Is it free to use?",
+      answer: "Yes! myhighschool.club is free to use for all schools. We believe in democratizing access to technology and helping schools create beautiful websites without the hassle of coding.",
     },
   ];
 
