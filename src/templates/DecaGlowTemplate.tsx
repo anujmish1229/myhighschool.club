@@ -15,8 +15,6 @@ import {
   Users,
 } from 'lucide-react';
 
-const HERO_IMAGE =
-  'https://raw.githubusercontent.com/dot-agent-sandbox/templates/main/deca-glow-hub/assets/hero-group.jpg';
 const LOGO_IMAGE =
   'https://raw.githubusercontent.com/dot-agent-sandbox/templates/main/deca-glow-hub/assets/deca-logo.png';
 
@@ -38,35 +36,27 @@ type TemplateCSSVars = CSSProperties & {
   '--template-accent': string;
 };
 
-const clampColor = (value: number) => Math.min(255, Math.max(0, value));
-
-const adjustColor = (hex: string, delta: number) => {
-  const parsed = hex.replace('#', '');
-  const num = parseInt(parsed, 16);
-  const r = clampColor((num >> 16) + delta);
-  const g = clampColor(((num >> 8) & 0x00ff) + delta);
-  const b = clampColor((num & 0x0000ff) + delta);
-  return `#${((r << 16) | (g << 8) | b).toString(16).padStart(6, '0')}`;
-};
-
 const DecaGlowTemplate = () => {
   const { config } = useConfig();
   const [scrolled, setScrolled] = useState(false);
 
-  const primary = config.primaryColor || '#0f4c81';
-  const accent = config.accentColor || '#1fb6ff';
+  // DECA Blue color scheme - fixed blue colors, not using config colors
+  const primary = '#0B6BB5'; // DECA Blue
+  const primaryDark = '#074A80';
+  const primaryLight = '#0E7FD1';
+  const accent = '#0B6BB5';
 
   const cssVars = useMemo<TemplateCSSVars>(
     () => ({
       '--template-primary': primary,
-      '--template-primary-dark': adjustColor(primary, -40),
-      '--template-primary-light': adjustColor(primary, 40),
-      '--template-background': '#f1f5f9',
-      '--template-muted': '#e2e8f0',
+      '--template-primary-dark': primaryDark,
+      '--template-primary-light': primaryLight,
+      '--template-background': '#ffffff',
+      '--template-muted': '#f1f5f9',
       '--template-muted-foreground': '#475569',
       '--template-accent': accent,
     }),
-    [primary, accent],
+    [primary, primaryDark, primaryLight, accent],
   );
 
   useEffect(() => {
@@ -154,21 +144,21 @@ const DecaGlowTemplate = () => {
               <p className="text-xl font-bold uppercase tracking-wide">
                 {config.clubName || 'DECA'}
               </p>
-              <p className="text-xs opacity-90">{config.clubTagline || 'We Mean Business'}</p>
+              <p className="text-xs opacity-90">{config.clubTagline || 'Your Chapter'}</p>
             </div>
           </button>
-          <nav className="hidden items-center gap-6 md:flex">
+          <nav className="hidden items-center gap-8 md:flex">
             {NAV_LINKS.map((link) => (
               <button
                 key={link.target}
                 onClick={() => scrollToSection(link.target)}
-                className="text-sm font-semibold uppercase tracking-[0.35em] text-white transition-colors hover:text-slate-200"
+                className="text-sm font-semibold uppercase tracking-[0.15em] text-white transition-colors hover:text-white/80"
               >
                 {link.label}
               </button>
             ))}
             <Button
-              className="rounded-full bg-white px-6 py-2 text-sm font-semibold uppercase tracking-[0.35em] text-[var(--template-primary)] shadow-[0_0_25px_rgba(255,255,255,0.35)] transition hover:bg-slate-100"
+              className="rounded-full bg-[var(--template-accent)] px-8 py-2 text-sm font-semibold uppercase tracking-[0.15em] text-white shadow-[0_0_25px_rgba(11,107,181,0.6)] transition hover:bg-[var(--template-primary-light)] hover:shadow-[0_0_35px_rgba(11,107,181,0.8)]"
               onClick={() => scrollToSection('join')}
             >
               Join Us
@@ -182,29 +172,22 @@ const DecaGlowTemplate = () => {
           id="home"
           className="relative flex min-h-screen items-center justify-center px-4 text-center text-white"
         >
-          <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${HERO_IMAGE})` }}>
-            <div className="absolute inset-0 bg-gradient-to-b from-[var(--template-primary-dark)]/90 via-[var(--template-primary)]/85 to-[var(--template-primary-dark)]/90" />
-          </div>
-          <div className="relative z-10 mx-auto max-w-4xl space-y-8 px-4">
-            <h1 className="text-4xl font-bold tracking-tight sm:text-6xl md:text-7xl lg:text-8xl">
-              {config.heroTitle || `${config.clubName || 'DECA'} YOUR CHAPTER`}
+          {/* Solid blue gradient background instead of image */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[var(--template-primary-dark)] via-[var(--template-primary)] to-[var(--template-primary-dark)]" />
+          
+          <div className="relative z-10 mx-auto max-w-5xl space-y-8 px-4">
+            <h1 className="text-5xl font-bold tracking-tight sm:text-6xl md:text-7xl lg:text-8xl">
+              {config.heroTitle || `DECA YOUR CHAPTER`}
             </h1>
-            <p className="text-xl font-light tracking-wide text-white/90 sm:text-2xl md:text-3xl">
+            <p className="text-2xl font-light tracking-wide text-white/90 sm:text-2xl md:text-3xl">
               {config.heroSubtitle || 'We Mean Business'}
             </p>
-            <div className="flex flex-wrap justify-center gap-4">
+            <div className="flex flex-wrap justify-center gap-4 pt-4">
               <Button
-                className="rounded-full bg-white px-12 py-6 text-lg font-semibold text-[var(--template-primary)] shadow-[0_0_25px_rgba(255,255,255,0.35)] transition hover:bg-slate-100"
+                className="rounded-full bg-white px-12 py-6 text-lg font-semibold text-[var(--template-primary)] shadow-[0_0_30px_rgba(255,255,255,0.5)] transition hover:bg-slate-50 hover:shadow-[0_0_40px_rgba(255,255,255,0.7)]"
                 onClick={() => scrollToSection('deca')}
               >
                 {config.heroButtonPrimary || 'Learn More'}
-              </Button>
-              <Button
-                variant="secondary"
-                className="rounded-full border border-white/60 bg-transparent px-8 py-6 text-lg font-semibold text-white transition hover:bg-white/10"
-                onClick={() => scrollToSection('join')}
-              >
-                {config.heroButtonSecondary || 'Join Our Chapter'}
               </Button>
             </div>
           </div>
@@ -221,7 +204,7 @@ const DecaGlowTemplate = () => {
               </p>
             </div>
 
-            <div className="grid gap-10 md:grid-cols-3">
+            <div className="grid gap-12 md:grid-cols-3 max-w-5xl mx-auto mb-12">
               {[
                 {
                   icon: Trophy,
@@ -240,20 +223,20 @@ const DecaGlowTemplate = () => {
                 },
               ].map((item) => (
                 <div key={item.title} className="text-center">
-                  <div className="mx-auto mb-6 flex h-32 w-32 items-center justify-center rounded-full bg-[var(--template-primary)] text-white shadow-[0_20px_45px_rgba(15,76,129,0.35)]">
+                  <div className="mx-auto mb-6 flex h-32 w-32 items-center justify-center rounded-full bg-[var(--template-primary)] text-white">
                     <item.icon className="h-16 w-16" strokeWidth={1.5} />
                   </div>
-                  <h3 className="text-2xl font-bold text-slate-900">{item.title}</h3>
-                  <p className="mt-3 text-slate-600">{item.text}</p>
+                  <h3 className="text-2xl font-bold text-slate-900 mb-4">{item.title}</h3>
+                  <p className="text-slate-600 leading-relaxed">{item.text}</p>
                 </div>
               ))}
             </div>
 
-            <div className="mt-16 rounded-xl bg-[var(--template-primary-light)]/25 px-8 py-10 text-left shadow-inner">
-              <h3 className="text-2xl font-bold text-slate-900 md:text-3xl">
+            <div className="rounded-lg bg-[#E5F2FB] px-8 py-10 md:py-12 text-left">
+              <h3 className="text-2xl font-bold text-slate-900 md:text-3xl mb-4">
                 {config.missionTitle || 'Our Mission'}
               </h3>
-              <p className="mt-4 text-lg text-slate-700">
+              <p className="text-lg text-slate-900/90">
                 {config.missionDescription ||
                   'We empower students to become academically prepared, community-oriented, professionally responsible, and experienced leaders through our comprehensive programs in marketing, finance, hospitality, and management.'}
               </p>
@@ -261,17 +244,17 @@ const DecaGlowTemplate = () => {
           </div>
         </section>
 
-        <section id="team" className="bg-[var(--template-muted)] py-20">
+        <section id="team" className="bg-white py-20">
           <div className="container mx-auto max-w-6xl px-4">
             <div className="mx-auto mb-16 max-w-3xl text-center">
               <h2 className="text-4xl font-bold text-slate-900 md:text-5xl">Meet Our Executive Team</h2>
-              <p className="mt-4 text-xl text-[var(--template-muted-foreground)]">
+              <p className="mt-4 text-xl text-slate-600">
                 Dedicated leaders working to make our chapter the best it can be
               </p>
             </div>
 
             {teamMembers.length === 0 ? (
-              <div className="rounded-3xl border border-dashed border-slate-300 bg-white p-12 text-center text-slate-500">
+              <div className="rounded-3xl border border-dashed border-slate-300 bg-slate-50 p-12 text-center text-slate-500">
                 Add your executive team to showcase chapter leadership.
               </div>
             ) : (
@@ -283,7 +266,7 @@ const DecaGlowTemplate = () => {
                         <Users className="h-16 w-16" />
                       </div>
                       <h3 className="text-xl font-bold text-center text-slate-900">{member.name}</h3>
-                      <p className="mt-2 text-center text-sm font-semibold uppercase tracking-[0.35em] text-[var(--template-primary)]">
+                      <p className="mt-2 text-center text-sm font-semibold uppercase tracking-[0.15em] text-[var(--template-primary)]">
                         {member.role}
                       </p>
                       <p className="mt-3 text-center text-sm text-slate-600">{member.bio}</p>
@@ -295,7 +278,7 @@ const DecaGlowTemplate = () => {
           </div>
         </section>
 
-        <section id="success" className="bg-white py-20">
+        <section id="success" className="bg-[#F8FAFC] py-20">
           <div className="container mx-auto max-w-6xl px-4">
             <div className="mx-auto mb-16 max-w-3xl text-center">
               <h2 className="text-4xl font-bold text-slate-900 md:text-5xl">Our Success Stories</h2>
@@ -308,7 +291,7 @@ const DecaGlowTemplate = () => {
               {achievements.map((achievement, idx) => (
                 <Card
                   key={`${achievement.title}-${idx}`}
-                  className="border-2 border-transparent transition-all duration-300 hover:border-[var(--template-primary)] hover:shadow-xl"
+                  className="border bg-white transition-all duration-300 hover:shadow-xl"
                 >
                   <CardContent className="flex gap-5 p-8">
                     <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-full bg-[var(--template-primary)]/15 text-[var(--template-primary)]">
@@ -317,7 +300,7 @@ const DecaGlowTemplate = () => {
                     <div className="space-y-3">
                       <div className="flex items-start justify-between gap-4">
                         <h3 className="text-xl font-bold text-slate-900">{achievement.title}</h3>
-                        <span className="rounded-full bg-[var(--template-primary)]/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-[var(--template-primary)]">
+                        <span className="rounded-full bg-[var(--template-primary)]/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.15em] text-[var(--template-primary)]">
                           {achievement.meta}
                         </span>
                       </div>
@@ -328,7 +311,7 @@ const DecaGlowTemplate = () => {
               ))}
             </div>
 
-            <div className="mt-12 rounded-xl border-2 border-[var(--template-primary)]/20 bg-[var(--template-primary)]/5 p-10 text-center">
+            <div className="mt-12 rounded-xl border-2 border-[var(--template-primary)]/20 bg-[#E5F2FB] p-10 text-center">
               <h3 className="text-2xl font-bold text-slate-900">Ready to Add Your Name to Our Success Stories?</h3>
               <p className="mt-3 text-lg text-slate-600">
                 Join us and discover your potential in the world of business!
@@ -353,10 +336,10 @@ const DecaGlowTemplate = () => {
                 { icon: Users, title: 'Who Can Join', lines: ['All Students', 'No Experience Needed'] },
                 { icon: Mail, title: 'Contact', lines: ['deca@yourschool.edu', '@yourchapter_deca'] },
               ].map((card) => (
-                <Card key={card.title} className="border border-white/20 bg-white/15 text-center backdrop-blur">
+                <Card key={card.title} className="border border-white/20 bg-white/10 text-center backdrop-blur">
                   <CardContent className="space-y-3 p-6">
                     <card.icon className="mx-auto h-12 w-12 text-white" />
-                    <h3 className="text-lg font-semibold uppercase tracking-[0.35em]">{card.title}</h3>
+                    <h3 className="text-lg font-semibold uppercase tracking-[0.15em]">{card.title}</h3>
                     {card.lines.map((line, idx) => (
                       <p key={idx} className="text-sm text-white/85">
                         {line}
@@ -367,16 +350,16 @@ const DecaGlowTemplate = () => {
               ))}
             </div>
 
-            <div className="mt-12 rounded-xl border-2 border-white/25 bg-white/15 p-10 backdrop-blur">
-              <h3 className="text-3xl font-bold text-center">How to Join</h3>
-              <div className="mt-8 space-y-5 text-lg text-white/90">
+            <div className="mt-12 rounded-xl border-2 border-white/20 bg-white/10 p-8 md:p-10 backdrop-blur">
+              <h3 className="text-3xl font-bold text-center mb-6">How to Join</h3>
+              <div className="space-y-4 text-lg text-white/90">
                 {[
                   'Attend any of our weekly meetings - no registration required!',
-                  'Fill out a membership form and pay the annual dues ($25).',
+                  'Fill out a membership form and pay the annual dues ($25)',
                   'Start participating in meetings, competitions, and events!',
                 ].map((step, index) => (
-                  <div key={index} className="flex items-start gap-4">
-                    <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-white text-[var(--template-primary)]">
+                  <div key={index} className="flex items-start gap-3">
+                    <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-white text-[var(--template-primary)] font-bold">
                       {index + 1}
                     </span>
                     <p>{step}</p>
@@ -384,8 +367,8 @@ const DecaGlowTemplate = () => {
                 ))}
               </div>
 
-              <div className="mt-10 text-center text-white/85">
-                <p className="text-xl font-semibold">Questions?</p>
+              <div className="mt-8 text-center text-white/90">
+                <p className="text-xl font-semibold mb-2">Questions?</p>
                 <p>Reach out to any executive member or email us at deca@yourschool.edu</p>
               </div>
             </div>
