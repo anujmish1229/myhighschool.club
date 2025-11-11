@@ -15,7 +15,7 @@ import DecaGlowTemplate from '@/templates/DecaGlowTemplate';
 
 export default function ClubWebsite() {
   const { schoolSlug, clubSlug } = useParams<{ schoolSlug: string; clubSlug: string }>();
-  const { loadSchoolConfig, loading, isConfigured, templateName } = useConfig();
+  const { loadSchoolConfig, loading, isConfigured, templateName, templateId } = useConfig();
   const [notFound, setNotFound] = useState(false);
   const [loadError, setLoadError] = useState<string | null>(null);
   const navigate = useNavigate();
@@ -34,6 +34,10 @@ export default function ClubWebsite() {
 
   useEffect(() => {
     let isMounted = true; // Prevent updates if component unmounts
+    
+    // Reset state when slug changes
+    setNotFound(false);
+    setLoadError(null);
     
     const loadConfig = async () => {
       if (schoolSlug && clubSlug && isMounted) {
@@ -153,13 +157,17 @@ export default function ClubWebsite() {
   }
 
   if (templateName === 'DECA Glow Template') {
+    console.log('✅ Rendering DECA Glow Template');
     return (
-      <Routes>
-        <Route path="/" element={<DecaGlowTemplate />} />
+      <Routes key={`deca-${schoolSlug}-${clubSlug}`}>
+        <Route path="/" element={<DecaGlowTemplate key={`deca-template-${templateId}`} />} />
         <Route path="*" element={<Navigate to={`/${schoolSlug}/${clubSlug}`} replace />} />
       </Routes>
     );
   }
+
+  console.log('✅ Rendering default template (ClubHome)');
+
 
   return (
     <Routes>
