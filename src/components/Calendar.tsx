@@ -15,7 +15,7 @@ export const Calendar = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
 
   // Convert config events (string dates) to Event objects with Date objects
-  const events: Event[] = config.events.map(event => ({
+  const events: Event[] = (Array.isArray(config.events) ? config.events : []).map(event => ({
     ...event,
     date: new Date(event.date),
   }));
