@@ -2,10 +2,10 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { ConfigProvider, useConfig } from "@/context/ConfigContext";
 import { AuthProvider } from "@/context/AuthContext";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import Index from "./pages/Index";
 import SchoolHome from "./pages/SchoolHome";
 import ClubWebsite from "./pages/ClubWebsite";
@@ -52,22 +52,33 @@ const hexToHsl = (hex: string): string => {
 };
 
 // Component to apply dynamic colors
+const DEFAULT_PRIMARY_HEX = '#3b82f6';
+const DEFAULT_ACCENT_HEX = '#8b5cf6';
+
 const ColorThemeApplier = () => {
   const { config } = useConfig();
+  const location = useLocation();
+
+  const isClubRoute = useMemo(() => /^\/[^/]+\/[^/]+/.test(location.pathname), [location.pathname]);
 
   useEffect(() => {
     // Convert hex to HSL and apply
     try {
-      const primaryHsl = hexToHsl(config.primaryColor);
-      const accentHsl = hexToHsl(config.accentColor);
+      const primaryHex = isClubRoute ? config.primaryColor : DEFAULT_PRIMARY_HEX;
+      const accentHex = isClubRoute ? config.accentColor : DEFAULT_ACCENT_HEX;
+
+      const primaryHsl = hexToHsl(primaryHex);
+      const accentHsl = hexToHsl(accentHex);
       
       document.documentElement.style.setProperty('--primary', primaryHsl);
       document.documentElement.style.setProperty('--accent', accentHsl);
     } catch (e) {
       // Fallback to default if conversion fails
       console.error('Error converting colors:', e);
+      document.documentElement.style.setProperty('--primary', hexToHsl(DEFAULT_PRIMARY_HEX));
+      document.documentElement.style.setProperty('--accent', hexToHsl(DEFAULT_ACCENT_HEX));
     }
-  }, [config.primaryColor, config.accentColor]);
+  }, [config.primaryColor, config.accentColor, isClubRoute]);
 
   return null;
 };
@@ -77,10 +88,10 @@ const App = () => (
     <AuthProvider>
       <ConfigProvider>
         <TooltipProvider>
-          <ColorThemeApplier />
-          <Toaster />
-          <Sonner />
           <BrowserRouter>
+            <ColorThemeApplier />
+            <Toaster />
+            <Sonner />
             <Routes>
               {/* Main Landing Page */}
               <Route path="/" element={<Index />} />

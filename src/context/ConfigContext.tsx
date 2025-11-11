@@ -9,6 +9,8 @@ interface ConfigContextType {
   schoolSlug?: string;
   schoolId?: string;
   loading: boolean;
+  templateId?: string;
+  templateName?: string;
   loadSchoolConfig: (slug: string) => Promise<boolean>;
 }
 
@@ -20,13 +22,17 @@ export const ConfigProvider = ({ children }: { children: ReactNode }) => {
   const [schoolSlug, setSchoolSlug] = useState<string | undefined>();
   const [schoolId, setSchoolId] = useState<string | undefined>();
   const [loading, setLoading] = useState(false);
+  const [templateId, setTemplateId] = useState<string | undefined>();
+  const [templateName, setTemplateName] = useState<string | undefined>();
 
   const loadSchoolConfig = useCallback(async (slug: string): Promise<boolean> => {
     setLoading(true);
+    setTemplateId(undefined);
+    setTemplateName(undefined);
     try {
       // slug can be either "school-slug/club-slug" or just "club-slug" (for backwards compatibility)
       const slugParts = slug.split('/');
-      let query = supabase.from('schools').select('id, config, high_school_slug, club_slug');
+      let query = supabase.from('schools').select('id, config, high_school_slug, club_slug, template_id');
       
       if (slugParts.length === 2) {
         // New format: school-slug/club-slug
@@ -48,6 +54,28 @@ export const ConfigProvider = ({ children }: { children: ReactNode }) => {
         setConfig(data.config);
         setSchoolSlug(`${data.high_school_slug}/${data.club_slug}`);
         setSchoolId(data.id);
+        setTemplateId(data.template_id);
+
+        if (data.template_id) {
+          try {
+            const { data: templateData, error: templateError } = await supabase
+              .from('templates')
+              .select('name')
+              .eq('id', data.template_id)
+              .single();
+
+            if (templateError) {
+              console.error('Error loading template metadata:', templateError);
+            }
+
+            setTemplateName(templateData?.name);
+          } catch (templateLookupError) {
+            console.error('Unexpected error loading template metadata:', templateLookupError);
+          }
+        } else {
+          setTemplateName(undefined);
+        }
+
         setIsConfigured(true);
         setLoading(false);
         return true;
@@ -98,6 +126,8 @@ export const ConfigProvider = ({ children }: { children: ReactNode }) => {
       schoolSlug, 
       schoolId,
       loading,
+      templateId,
+      templateName,
       loadSchoolConfig 
     }}>
       {children}

@@ -11,10 +11,11 @@ import Announcements from './Announcements';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 import { Compass, ArrowLeft, ShieldCheck } from 'phosphor-react';
+import DecaGlowTemplate from '@/templates/DecaGlowTemplate';
 
 export default function ClubWebsite() {
   const { schoolSlug, clubSlug } = useParams<{ schoolSlug: string; clubSlug: string }>();
-  const { loadSchoolConfig, loading, isConfigured } = useConfig();
+  const { loadSchoolConfig, loading, isConfigured, templateName } = useConfig();
   const [notFound, setNotFound] = useState(false);
   const [loadError, setLoadError] = useState<string | null>(null);
   const navigate = useNavigate();
@@ -148,6 +149,15 @@ export default function ClubWebsite() {
           </Button>
         </motion.div>
       </div>
+    );
+  }
+
+  if (templateName === 'DECA Glow Template') {
+    return (
+      <Routes>
+        <Route path="/" element={<DecaGlowTemplate />} />
+        <Route path="*" element={<Navigate to={`/${schoolSlug}/${clubSlug}`} replace />} />
+      </Routes>
     );
   }
 
