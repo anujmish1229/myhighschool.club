@@ -32,7 +32,6 @@ export const ontarioSchools: School[] = [
   { id: "22", name: "Unionville High School", city: "Markham", slug: "unionville-high-school" },
   { id: "23", name: "Vaughan Secondary School", city: "Vaughan", slug: "vaughan-secondary-school" },
   { id: "24", name: "Don Mills Collegiate Institute", city: "Toronto", slug: "don-mills-collegiate-institute" },
-  { id: "25", name: "Ajax High School", city: "Ajax", slug: "ajax-high-school" },
 ];
 
 
