@@ -168,7 +168,6 @@ export default function ClubWebsite() {
 
   console.log('✅ Rendering default template (ClubHome)');
 
-
   return (
     <Routes>
       <Route path="/" element={<ClubHome />} />
