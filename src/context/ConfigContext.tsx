@@ -4,7 +4,7 @@ import { supabase } from '@/lib/supabase';
 
 interface ConfigContextType {
   config: WebsiteConfig;
-  updateConfig: (newConfig: WebsiteConfig, schoolId?: string) => Promise<void>;
+  updateConfig: (newConfig: WebsiteConfig, schoolId?: string, templateId?: string) => Promise<void>;
   isConfigured: boolean;
   schoolSlug?: string;
   schoolId?: string;
@@ -101,25 +101,36 @@ export const ConfigProvider = ({ children }: { children: ReactNode }) => {
     }
   }, []); // Empty deps - this function never needs to change
 
-  const updateConfig = useCallback(async (newConfig: WebsiteConfig, schoolIdParam?: string) => {
+  const updateConfig = useCallback(async (newConfig: WebsiteConfig, schoolIdParam?: string, newTemplateId?: string) => {
     setConfig(newConfig);
     
     // If we have a school ID (either from param or state), update in Supabase
     const idToUpdate = schoolIdParam || schoolId;
     if (idToUpdate) {
       try {
+        const updateData: any = {
+          config: newConfig,
+          updated_at: new Date().toISOString()
+        };
+        
+        // If a new template ID is provided, update it
+        if (newTemplateId !== undefined) {
+          updateData.template_id = newTemplateId;
+          setTemplateId(newTemplateId);
+          console.log('🎨 Updating template_id to:', newTemplateId);
+        }
+        
         const { error } = await supabase
           .from('schools')
-          .update({ 
-            config: newConfig,
-            updated_at: new Date().toISOString()
-          })
+          .update(updateData)
           .eq('id', idToUpdate);
 
         if (error) {
           console.error('Error updating school config:', error);
           throw error;
         }
+        
+        console.log('✅ Config updated successfully');
       } catch (error) {
         console.error('Failed to update config in Supabase:', error);
         throw error;
