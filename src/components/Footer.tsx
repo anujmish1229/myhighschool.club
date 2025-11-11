@@ -1,4 +1,5 @@
 import { EnvelopeSimple, Phone, MapPin, GithubLogo, TwitterLogo, LinkedinLogo } from "phosphor-react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const scrollToSection = (hash: string) => {
@@ -90,6 +91,12 @@ const Footer = () => {
               >
                 Contact
               </a>
+              <Link
+                to="/privacy-policy"
+                className="text-foreground/70 hover:text-foreground transition-colors cursor-pointer"
+              >
+                Privacy Policy
+              </Link>
             </div>
           </div>
 
@@ -103,7 +110,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center gap-3 text-foreground/70">
                 <Phone size={20} weight="light" />
-                <span>+1 (555) 123-4567</span>
+                <span>+1 (647) 797-6920</span>
               </div>
               <div className="flex items-center gap-3 text-foreground/70">
                 <MapPin size={20} weight="light" />
@@ -114,7 +121,7 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-border/50 mt-12 pt-8 text-center text-foreground/60">
-          <p>&copy; {new Date().getFullYear()} myhighschool.club. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} myhighschool.club. A Lunate Labs Project</p>
         </div>
       </div>
     </footer>

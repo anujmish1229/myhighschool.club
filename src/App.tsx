@@ -14,6 +14,7 @@ import Dashboard from "./pages/Dashboard";
 import EditSchool from "./pages/EditSchool";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NotFound from "./pages/NotFound";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 
 const queryClient = new QueryClient();
 
@@ -95,6 +96,7 @@ const App = () => (
             <Routes>
               {/* Main Landing Page */}
               <Route path="/" element={<Index />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               
               {/* Authentication & Admin Routes */}
               <Route path="/login" element={<Login />} />
