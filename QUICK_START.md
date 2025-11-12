@@ -44,9 +44,9 @@ CREATE TABLE schools (
 ALTER TABLE schools ENABLE ROW LEVEL SECURITY;
 ALTER TABLE templates ENABLE ROW LEVEL SECURITY;
 
--- Access policies
-CREATE POLICY "Users can view their own schools"
-  ON schools FOR SELECT USING (auth.uid() = user_id);
+-- Access policies (club websites are PUBLIC, but only owners can edit)
+CREATE POLICY "Anyone can view schools"
+  ON schools FOR SELECT USING (true);
 CREATE POLICY "Users can insert their own schools"
   ON schools FOR INSERT WITH CHECK (auth.uid() = user_id);
 CREATE POLICY "Users can update their own schools"
@@ -54,8 +54,8 @@ CREATE POLICY "Users can update their own schools"
 CREATE POLICY "Users can delete their own schools"
   ON schools FOR DELETE USING (auth.uid() = user_id);
 
-CREATE POLICY "Anyone can view templates"
-  ON templates FOR SELECT TO authenticated USING (true);
+CREATE POLICY "Public can view templates"
+  ON templates FOR SELECT USING (true);
 
 -- Seed templates (safe to run multiple times)
 INSERT INTO templates (id, name, description, default_config) VALUES
