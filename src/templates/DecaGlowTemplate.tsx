@@ -36,15 +36,48 @@ type TemplateCSSVars = CSSProperties & {
   '--template-accent': string;
 };
 
+const DEFAULT_PRIMARY = '#0B6BB5';
+const DEFAULT_ACCENT = '#0B6BB5';
+
+const isValidHexColor = (color: string | undefined): color is string =>
+  typeof color === 'string' && /^#([0-9A-F]{3}){1,2}$/i.test(color.trim());
+
+const adjustColorBrightness = (hexColor: string, amount: number) => {
+  const cleanHex = hexColor.replace('#', '');
+  const expandedHex =
+    cleanHex.length === 3
+      ? cleanHex
+          .split('')
+          .map((char) => char + char)
+          .join('')
+      : cleanHex;
+
+  const num = parseInt(expandedHex, 16);
+
+  const clamp = (value: number) => Math.min(255, Math.max(0, value));
+
+  const r = clamp((num >> 16) + amount);
+  const g = clamp(((num >> 8) & 0x00ff) + amount);
+  const b = clamp((num & 0x0000ff) + amount);
+
+  return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)}`;
+};
+
 const DecaGlowTemplate = () => {
   const { config } = useConfig();
   const [scrolled, setScrolled] = useState(false);
 
-  // DECA Blue color scheme - fixed blue colors, not using config colors
-  const primary = '#0B6BB5'; // DECA Blue
-  const primaryDark = '#074A80';
-  const primaryLight = '#0E7FD1';
-  const accent = '#0B6BB5';
+  const { primary, primaryDark, primaryLight, accent } = useMemo(() => {
+    const fallbackPrimary = isValidHexColor(config.primaryColor) ? config.primaryColor : DEFAULT_PRIMARY;
+    const fallbackAccent = isValidHexColor(config.accentColor) ? config.accentColor : undefined;
+
+    return {
+      primary: fallbackPrimary,
+      primaryDark: adjustColorBrightness(fallbackPrimary, -40),
+      primaryLight: adjustColorBrightness(fallbackPrimary, 30),
+      accent: fallbackAccent ?? fallbackPrimary ?? DEFAULT_ACCENT,
+    };
+  }, [config.primaryColor, config.accentColor]);
 
   const cssVars = useMemo<TemplateCSSVars>(
     () => ({

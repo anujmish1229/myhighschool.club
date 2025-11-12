@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
+import { DEFAULT_ACCENT_HEX, DEFAULT_PRIMARY_HEX, resolveHexColor } from "@/lib/colors";
 
 interface SetupProps {
   isEditMode?: boolean;
@@ -29,6 +30,9 @@ const Setup = ({ isEditMode = false, schoolId }: SetupProps) => {
   }, [isEditMode, config]);
 
   const totalSteps = 7;
+
+  const primaryColorPickerValue = resolveHexColor(formData.primaryColor, DEFAULT_PRIMARY_HEX);
+  const accentColorPickerValue = resolveHexColor(formData.accentColor, DEFAULT_ACCENT_HEX);
 
   const updateField = (field: keyof WebsiteConfig, value: any) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -245,30 +249,40 @@ const Setup = ({ isEditMode = false, schoolId }: SetupProps) => {
                         />
                       </div>
                       <div>
-                        <Label>Primary Color (hex code)</Label>
-                        <div className="flex gap-2 mt-2">
+                        <Label>Primary Color</Label>
+                        <div className="flex items-center gap-2 mt-2">
                           <Input
                             value={formData.primaryColor}
                             onChange={(e) => updateField("primaryColor", e.target.value)}
                             placeholder="#3b82f6"
+                            className="font-mono"
                           />
-                          <div
-                            className="w-12 h-10 rounded border border-border"
-                            style={{ backgroundColor: formData.primaryColor }}
+                          <input
+                            type="color"
+                            aria-label="Select primary color"
+                            title="Select primary color"
+                            value={primaryColorPickerValue}
+                            onChange={(e) => updateField("primaryColor", e.target.value)}
+                            className="h-10 w-12 rounded border border-border cursor-pointer bg-transparent p-0"
                           />
                         </div>
                       </div>
                       <div>
-                        <Label>Accent Color (hex code)</Label>
-                        <div className="flex gap-2 mt-2">
+                        <Label>Accent Color</Label>
+                        <div className="flex items-center gap-2 mt-2">
                           <Input
                             value={formData.accentColor}
                             onChange={(e) => updateField("accentColor", e.target.value)}
                             placeholder="#8b5cf6"
+                            className="font-mono"
                           />
-                          <div
-                            className="w-12 h-10 rounded border border-border"
-                            style={{ backgroundColor: formData.accentColor }}
+                          <input
+                            type="color"
+                            aria-label="Select accent color"
+                            title="Select accent color"
+                            value={accentColorPickerValue}
+                            onChange={(e) => updateField("accentColor", e.target.value)}
+                            className="h-10 w-12 rounded border border-border cursor-pointer bg-transparent p-0"
                           />
                         </div>
                       </div>

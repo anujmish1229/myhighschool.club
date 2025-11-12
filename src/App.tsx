@@ -15,46 +15,16 @@ import EditSchool from "./pages/EditSchool";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NotFound from "./pages/NotFound";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import {
+  DEFAULT_ACCENT_HEX,
+  DEFAULT_PRIMARY_HEX,
+  createAccentGradient,
+  getReadableForegroundHsl,
+  hexToHsl,
+  resolveHexColor,
+} from "@/lib/colors";
 
 const queryClient = new QueryClient();
-
-// Helper function to convert hex to HSL
-const hexToHsl = (hex: string): string => {
-  // Remove # if present
-  hex = hex.replace('#', '');
-  
-  // Parse RGB
-  const r = parseInt(hex.substring(0, 2), 16) / 255;
-  const g = parseInt(hex.substring(2, 4), 16) / 255;
-  const b = parseInt(hex.substring(4, 6), 16) / 255;
-
-  const max = Math.max(r, g, b);
-  const min = Math.min(r, g, b);
-  let h = 0;
-  let s = 0;
-  const l = (max + min) / 2;
-
-  if (max !== min) {
-    const d = max - min;
-    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-    
-    switch (max) {
-      case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
-      case g: h = ((b - r) / d + 2) / 6; break;
-      case b: h = ((r - g) / d + 4) / 6; break;
-    }
-  }
-
-  h = Math.round(h * 360);
-  s = Math.round(s * 100);
-  const lightness = Math.round(l * 100);
-
-  return `${h} ${s}% ${lightness}%`;
-};
-
-// Component to apply dynamic colors
-const DEFAULT_PRIMARY_HEX = '#3b82f6';
-const DEFAULT_ACCENT_HEX = '#8b5cf6';
 
 const ColorThemeApplier = () => {
   const { config } = useConfig();
@@ -65,19 +35,29 @@ const ColorThemeApplier = () => {
   useEffect(() => {
     // Convert hex to HSL and apply
     try {
-      const primaryHex = isClubRoute ? config.primaryColor : DEFAULT_PRIMARY_HEX;
-      const accentHex = isClubRoute ? config.accentColor : DEFAULT_ACCENT_HEX;
+      const primaryHex = resolveHexColor(isClubRoute ? config.primaryColor : undefined, DEFAULT_PRIMARY_HEX);
+      const accentFallback = isClubRoute ? primaryHex : DEFAULT_ACCENT_HEX;
+      const accentHex = resolveHexColor(isClubRoute ? config.accentColor : undefined, accentFallback);
 
       const primaryHsl = hexToHsl(primaryHex);
       const accentHsl = hexToHsl(accentHex);
       
       document.documentElement.style.setProperty('--primary', primaryHsl);
       document.documentElement.style.setProperty('--accent', accentHsl);
+      document.documentElement.style.setProperty('--primary-foreground', getReadableForegroundHsl(primaryHex));
+      document.documentElement.style.setProperty('--accent-foreground', getReadableForegroundHsl(accentHex));
+      document.documentElement.style.setProperty('--gradient-accent', createAccentGradient(primaryHsl, accentHsl));
     } catch (e) {
       // Fallback to default if conversion fails
       console.error('Error converting colors:', e);
       document.documentElement.style.setProperty('--primary', hexToHsl(DEFAULT_PRIMARY_HEX));
       document.documentElement.style.setProperty('--accent', hexToHsl(DEFAULT_ACCENT_HEX));
+      document.documentElement.style.setProperty('--primary-foreground', getReadableForegroundHsl(DEFAULT_PRIMARY_HEX));
+      document.documentElement.style.setProperty('--accent-foreground', getReadableForegroundHsl(DEFAULT_ACCENT_HEX));
+      document.documentElement.style.setProperty(
+        '--gradient-accent',
+        createAccentGradient(hexToHsl(DEFAULT_PRIMARY_HEX), hexToHsl(DEFAULT_ACCENT_HEX)),
+      );
     }
   }, [config.primaryColor, config.accentColor, isClubRoute]);
 
