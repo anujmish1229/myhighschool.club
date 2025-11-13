@@ -96,6 +96,14 @@ const App = () => (
                   </ProtectedRoute>
                 } 
               />
+              <Route 
+                path="/setup/:schoolSlug/:clubSlug" 
+                element={
+                  <ProtectedRoute>
+                    <EditSchool />
+                  </ProtectedRoute>
+                } 
+              />
               
               {/* Dynamic Club Pages (nested under school) */}
               <Route path="/:schoolSlug/:clubSlug/*" element={<ClubWebsite />} />
