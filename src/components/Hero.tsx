@@ -60,7 +60,7 @@ const Hero = () => {
               }
             }}
           >
-            School not here? Request it to be added.
+            Can't find your school? Request it to be added.
           </motion.button>
 
         </motion.div>
