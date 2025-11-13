@@ -35,7 +35,7 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-xl md:text-2xl text-foreground/70 mb-12"
           >
-            AI-powered websites that bring your school clubs to life aa
+            AI-powered websites that bring your school clubs to life.
           </motion.p>  
 
           {/* Search Bar */}
