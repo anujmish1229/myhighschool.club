@@ -1,20 +1,29 @@
 import { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft, ShieldCheck } from 'phosphor-react';
 import { useAuth } from '@/context/AuthContext';
 import { useConfig } from '@/context/ConfigContext';
 import { supabase } from '@/lib/supabase';
+import Settings from './Settings';
 import Setup from './Setup';
 import { Button } from '@/components/ui/button';
 
-export default function EditSchool() {
+interface EditSchoolProps {
+  isSetup?: boolean;
+}
+
+export default function EditSchool({ isSetup = false }: EditSchoolProps) {
   const { schoolSlug, clubSlug } = useParams<{ schoolSlug: string; clubSlug: string }>();
+  const location = useLocation();
   const navigate = useNavigate();
   const { user, loading: authLoading } = useAuth();
   const { loadSchoolConfig, loading: configLoading, schoolId } = useConfig();
   const [isOwner, setIsOwner] = useState(false);
   const [checking, setChecking] = useState(true);
+  
+  // Determine if we're in setup mode based on route or prop
+  const isSetupMode = isSetup || location.pathname.includes('/setup/');
 
   useEffect(() => {
     let isMounted = true;
@@ -116,9 +125,16 @@ export default function EditSchool() {
           initial={{ opacity: 0, y: 32 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-[0_40px_120px_-50px_rgba(59,130,246,0.7)] backdrop-blur-xl sm:p-10"
         >
-          <Setup isEditMode={true} schoolId={schoolId} />
+          {isSetupMode ? (
+            <div className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-[0_40px_120px_-50px_rgba(59,130,246,0.7)] backdrop-blur-xl sm:p-10">
+              <Setup schoolId={schoolId} />
+            </div>
+          ) : (
+            <div className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-[0_40px_120px_-50px_rgba(59,130,246,0.7)] backdrop-blur-xl sm:p-10">
+              <Settings schoolId={schoolId} />
+            </div>
+          )}
         </motion.div>
       </div>
     </div>

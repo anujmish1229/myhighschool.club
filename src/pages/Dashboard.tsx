@@ -123,6 +123,7 @@ export default function Dashboard() {
         throw new Error('Template not found');
       }
 
+      // Create the entry with default config (will be updated during setup)
       const { data, error } = await supabase
         .from('schools')
         .insert([
@@ -139,8 +140,9 @@ export default function Dashboard() {
 
       if (error) throw error;
 
-      toast.success('Club website created successfully!');
-      setSchools([data, ...schools]);
+      // Redirect to setup to configure the website
+      navigate(`/setup/${selectedHighSchool.slug}/${newClubSlug.toLowerCase()}`);
+      
       setShowCreateForm(false);
       setNewClubSlug('');
       setSelectedHighSchool(null);

@@ -13,21 +13,21 @@ import { toast } from "sonner";
 import { DEFAULT_ACCENT_HEX, DEFAULT_PRIMARY_HEX, resolveHexColor } from "@/lib/colors";
 
 interface SetupProps {
-  isEditMode?: boolean;
   schoolId?: string;
 }
 
-const Setup = ({ isEditMode = false, schoolId }: SetupProps) => {
+const Setup = ({ schoolId }: SetupProps) => {
   const navigate = useNavigate();
   const { updateConfig, config } = useConfig();
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState<WebsiteConfig>(defaultConfig);
   
   useEffect(() => {
-    if (isEditMode && config) {
+    // Load existing config if available (for completing setup)
+    if (config && schoolId) {
       setFormData(config);
     }
-  }, [isEditMode, config]);
+  }, [config, schoolId]);
 
   const totalSteps = 7;
 
@@ -165,12 +165,8 @@ const Setup = ({ isEditMode = false, schoolId }: SetupProps) => {
   const handleFinish = async () => {
     try {
       await updateConfig(formData, schoolId);
-      toast.success(isEditMode ? 'Club website updated successfully!' : 'Club website created successfully!');
-      if (isEditMode) {
-        navigate("/dashboard");
-      } else {
-        navigate("/");
-      }
+      toast.success('Club website created successfully!');
+      navigate("/dashboard");
     } catch (error) {
       toast.error('Failed to save configuration');
       console.error(error);
@@ -194,10 +190,10 @@ const Setup = ({ isEditMode = false, schoolId }: SetupProps) => {
           className="text-center mb-12"
         >
           <h1 className="text-5xl font-light mb-4">
-            {isEditMode ? 'Edit Your' : 'Create Your'} <span className="text-primary">Club Website</span>
+            Create Your <span className="text-primary">Club Website</span>
           </h1>
           <p className="text-xl text-foreground/70">
-            {isEditMode ? 'Update your website configuration' : 'Answer a few questions to generate your custom website'}
+            Answer a few questions to generate your custom website
           </p>
           <div className="flex justify-center gap-2 mt-8">
             {Array.from({ length: totalSteps }).map((_, i) => (
