@@ -427,21 +427,6 @@ const DecaGlowTemplate = () => {
           </div>
         </section>
 
-        <section className="bg-white py-12">
-          <div className="container mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 px-4 text-center text-slate-500 md:flex-row md:text-left">
-            <div className="flex items-center gap-3 text-slate-700">
-              <img src={LOGO_IMAGE} alt="DECA" className="h-10 w-10" />
-              <div>
-                <p className="font-semibold text-slate-900">{config.clubName || 'DECA Your Chapter'}</p>
-                <p className="text-sm text-slate-500">{config.clubTagline || 'We Mean Business'}</p>
-              </div>
-            </div>
-            <div className="text-sm text-slate-500">
-              <p>© {new Date().getFullYear()} {config.clubName || 'DECA Your Chapter'}. All rights reserved.</p>
-              <p className="text-xs">Preparing emerging leaders and entrepreneurs.</p>
-            </div>
-          </div>
-        </section>
       </main>
 
       {faqs.length > 0 && (
@@ -479,7 +464,28 @@ const DecaGlowTemplate = () => {
           </div>
         </section>
       )}
+      <section className="bg-white py-12">
+          <div className="container mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 px-4 text-center text-slate-500 md:flex-row md:text-left">
+            <div className="flex items-center gap-3 text-slate-700">
+              <img src={LOGO_IMAGE} alt="DECA" className="h-10 w-10" />
+              <div>
+                <p className="font-semibold text-slate-900">{config.clubName || 'DECA Your Chapter'}</p>
+                <p className="text-sm text-slate-500">{config.clubTagline || 'We Mean Business'}</p>
+              </div>
+            </div>
+            <div className="text-sm text-slate-500">
+              <p>© {new Date().getFullYear()} {config.clubName || 'DECA Your Chapter'}. All rights reserved.</p>
+              <p className="text-xs">Preparing emerging leaders and entrepreneurs.</p>
+            </div>
+          </div>
+          <div className="mt-6 px-4">
+            <center>
+              <p className="text-xs">Powered by <a href="https://myhighschool.club" target="_blank" rel="noopener noreferrer">myHighSchool.club</a>.</p>
+            </center>
+          </div>
+        </section>
     </div>
+    
   );
 };
 
