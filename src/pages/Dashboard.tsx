@@ -218,7 +218,7 @@ export default function Dashboard() {
           transition={{ duration: 0.6 }}
           className="flex flex-col gap-6 rounded-3xl border border-white/10 bg-background/60 p-8 shadow-2xl backdrop-blur-xl md:flex-row md:items-center md:justify-between"
         >
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4" onClick={() => navigate('../')} style={{ cursor: 'pointer' }}>
             <img src="/logo.png" alt="myhighschool.club" className="h-12 w-12 rounded-2xl shadow-xl" />
             <div>
               <h1 className="text-3xl font-bold text-gradient">Club Command Center</h1>
