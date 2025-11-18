@@ -11,6 +11,7 @@ import SchoolHome from "./pages/SchoolHome";
 import ClubWebsite from "./pages/ClubWebsite";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
+import ManagerDashboard from "./pages/ManagerDashboard";
 import EditSchool from "./pages/EditSchool";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NotFound from "./pages/NotFound";
@@ -85,6 +86,14 @@ const App = () => (
                 element={
                   <ProtectedRoute>
                     <Dashboard />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/manager-dashboard" 
+                element={
+                  <ProtectedRoute>
+                    <ManagerDashboard />
                   </ProtectedRoute>
                 } 
               />

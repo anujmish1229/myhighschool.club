@@ -36,8 +36,8 @@ export default function EditSchool({ isSetup = false }: EditSchoolProps) {
         return;
       }
 
-      // Load the school config
-      const success = await loadSchoolConfig(`${schoolSlug}/${clubSlug}`);
+      // Load the school config (ignore approval status since owner is editing)
+      const success = await loadSchoolConfig(`${schoolSlug}/${clubSlug}`, true);
       if (!isMounted) return;
       
       if (!success) {
