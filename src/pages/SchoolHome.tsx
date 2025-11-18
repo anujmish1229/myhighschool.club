@@ -34,7 +34,8 @@ const SchoolHome = () => {
         const { data, error } = await supabase
           .from('schools')
           .select('id, club_slug, config')
-          .eq('high_school_slug', schoolSlug);
+          .eq('high_school_slug', schoolSlug)
+          .eq('status', 'approved');
 
         if (error) {
           console.error('Error fetching clubs:', error);

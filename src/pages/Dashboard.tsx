@@ -4,15 +4,17 @@ import { useAuth } from '@/context/AuthContext';
 import { supabase } from '@/lib/supabase';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
 import { motion } from 'framer-motion';
-import { PlusCircle, Globe, Settings, LogOut, ExternalLink } from 'lucide-react';
+import { PlusCircle, Globe, Settings, LogOut, ExternalLink, Clock, CheckCircle } from 'lucide-react';
 import { Notebook, Lightning, UsersThree, ShieldCheck, ArrowRight } from 'phosphor-react';
 import RotatingEarth from '@/components/RotatingEarth';
 import { ontarioSchools, searchSchools } from '@/data/ontarioSchools';
 import type { School as HighSchool } from '@/data/ontarioSchools';
+import { isManager } from '@/lib/managerUtils';
 
 interface School {
   id: string;
@@ -22,6 +24,7 @@ interface School {
   config: any;
   created_at: string;
   updated_at: string;
+  status: 'pending' | 'approved';
 }
 
 interface Template {
@@ -45,6 +48,7 @@ export default function Dashboard() {
   const [showSchoolDropdown, setShowSchoolDropdown] = useState(false);
   const [selectedTemplate, setSelectedTemplate] = useState('');
   const [creating, setCreating] = useState(false);
+  const [userIsManager, setUserIsManager] = useState(false);
 
   useEffect(() => {
     if (!authLoading && !user) {
@@ -58,8 +62,16 @@ export default function Dashboard() {
       console.log('👤 User authenticated:', user.email);
       fetchSchools();
       fetchTemplates();
+      checkManagerStatus();
     }
   }, [user]);
+
+  const checkManagerStatus = async () => {
+    if (user?.email) {
+      const managerStatus = await isManager(user.email);
+      setUserIsManager(managerStatus);
+    }
+  };
 
   const fetchSchools = async () => {
     try {
@@ -133,6 +145,7 @@ export default function Dashboard() {
             club_slug: newClubSlug.toLowerCase(),
             template_id: selectedTemplate,
             config: template.default_config,
+            status: 'pending',
           },
         ])
         .select()
@@ -235,14 +248,26 @@ export default function Dashboard() {
                 <p>Bring your school community online</p>
               </div>
             </div>
-            <Button
-              onClick={handleSignOut}
-              variant="ghost"
-              className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-foreground/70 hover:bg-white/10"
-            >
-              <LogOut className="h-4 w-4" />
-              Sign out
-            </Button>
+            <div className="flex items-center gap-2">
+              {userIsManager && (
+                <Button
+                  onClick={() => navigate('/manager-dashboard')}
+                  variant="outline"
+                  className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm hover:bg-white/10"
+                >
+                  <ShieldCheck size={16} weight="duotone" />
+                  Manager Dashboard
+                </Button>
+              )}
+              <Button
+                onClick={handleSignOut}
+                variant="ghost"
+                className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-foreground/70 hover:bg-white/10"
+              >
+                <LogOut className="h-4 w-4" />
+                Sign out
+              </Button>
+            </div>
           </div>
         </motion.header>
 
@@ -429,10 +454,23 @@ export default function Dashboard() {
             >
               <Card className="border-0 bg-transparent p-0 shadow-none">
                 <CardHeader className="space-y-3">
-                  <CardTitle className="flex items-center gap-2 text-lg text-foreground/90">
-                    <Globe className="h-5 w-5 text-primary" />
-                    {school.config.clubName || school.club_slug}
-                  </CardTitle>
+                  <div className="flex items-start justify-between gap-2">
+                    <CardTitle className="flex items-center gap-2 text-lg text-foreground/90">
+                      <Globe className="h-5 w-5 text-primary" />
+                      {school.config.clubName || school.club_slug}
+                    </CardTitle>
+                    {school.status === 'pending' ? (
+                      <Badge variant="outline" className="flex items-center gap-1 border-yellow-500/50 bg-yellow-500/10 text-yellow-500">
+                        <Clock className="h-3 w-3" />
+                        Pending
+                      </Badge>
+                    ) : (
+                      <Badge variant="outline" className="flex items-center gap-1 border-green-500/50 bg-green-500/10 text-green-500">
+                        <CheckCircle className="h-3 w-3" />
+                        Approved
+                      </Badge>
+                    )}
+                  </div>
                   <CardDescription className="text-sm text-foreground/60">
                     {ontarioSchools.find((s) => s.slug === school.high_school_slug)?.name || school.high_school_slug}
                   </CardDescription>
@@ -448,8 +486,10 @@ export default function Dashboard() {
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="flex-1 border border-white/10 bg-white/5 text-foreground/70 hover:bg-white/10"
+                    className="flex-1 border border-white/10 bg-white/5 text-foreground/70 hover:bg-white/10 disabled:opacity-50 disabled:cursor-not-allowed"
                     onClick={() => window.open(`/${school.high_school_slug}/${school.club_slug}`, '_blank')}
+                    disabled={school.status === 'pending'}
+                    title={school.status === 'pending' ? 'Club must be approved before viewing' : 'View site'}
                   >
                     <ExternalLink className="mr-2 h-4 w-4" />
                     View site
