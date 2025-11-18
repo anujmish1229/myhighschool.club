@@ -11,7 +11,7 @@ interface ConfigContextType {
   loading: boolean;
   templateId?: string;
   templateName?: string;
-  loadSchoolConfig: (slug: string) => Promise<boolean>;
+  loadSchoolConfig: (slug: string, ignoreApprovalStatus?: boolean) => Promise<boolean>;
 }
 
 const ConfigContext = createContext<ConfigContextType | undefined>(undefined);
@@ -25,7 +25,7 @@ export const ConfigProvider = ({ children }: { children: ReactNode }) => {
   const [templateId, setTemplateId] = useState<string | undefined>();
   const [templateName, setTemplateName] = useState<string | undefined>();
 
-  const loadSchoolConfig = useCallback(async (slug: string): Promise<boolean> => {
+  const loadSchoolConfig = useCallback(async (slug: string, ignoreApprovalStatus = false): Promise<boolean> => {
     setLoading(true);
     // Reset all state to ensure clean load
     setTemplateId(undefined);
@@ -44,6 +44,11 @@ export const ConfigProvider = ({ children }: { children: ReactNode }) => {
       } else {
         // Old format or just club slug (backwards compatibility)
         query = query.eq('club_slug', slug);
+      }
+
+      // Filter by approved status for public viewing (unless explicitly ignored)
+      if (!ignoreApprovalStatus) {
+        query = query.eq('status', 'approved');
       }
 
       const { data, error } = await query.single();

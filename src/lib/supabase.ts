@@ -22,6 +22,7 @@ export type Database = {
           config: any;
           created_at: string;
           updated_at: string;
+          status: 'pending' | 'approved';
         };
         Insert: {
           id?: string;
@@ -32,6 +33,7 @@ export type Database = {
           config: any;
           created_at?: string;
           updated_at?: string;
+          status?: 'pending' | 'approved';
         };
         Update: {
           id?: string;
@@ -42,6 +44,7 @@ export type Database = {
           config?: any;
           created_at?: string;
           updated_at?: string;
+          status?: 'pending' | 'approved';
         };
       };
       templates: {
@@ -68,6 +71,29 @@ export type Database = {
           preview_image?: string;
           default_config?: any;
           created_at?: string;
+        };
+      };
+      school_managers: {
+        Row: {
+          id: string;
+          high_school_slug: string;
+          manager_email: string;
+          created_at: string;
+          created_by: string | null;
+        };
+        Insert: {
+          id?: string;
+          high_school_slug: string;
+          manager_email: string;
+          created_at?: string;
+          created_by?: string | null;
+        };
+        Update: {
+          id?: string;
+          high_school_slug?: string;
+          manager_email?: string;
+          created_at?: string;
+          created_by?: string | null;
         };
       };
     };
