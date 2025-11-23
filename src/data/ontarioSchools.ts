@@ -265,6 +265,8 @@ export const ontarioSchools: School[] = [
   { id: "249", name: "King George Secondary School", city: "Oshawa", slug: "king-george-secondary-school" },
   { id: "250", name: "Osgoode Secondary School", city: "Osgoode", slug: "osgoode-secondary-school" },
   { id: "251", name: "J. Clarke Richardson High School", city: "Ajax", slug: "j-clarke-richardson-high-school" },
+  // broski anuj lock in and fix code
+  { id: "252", name: "Pine Ridge Secondary School", city: "Pickering", slug: "pine-ridge-secondary-school" }
 ];
 
 
