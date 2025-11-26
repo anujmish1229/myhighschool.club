@@ -98,6 +98,7 @@ const Settings = ({ schoolId }: SettingsProps) => {
   const [openSections, setOpenSections] = useState<Record<string, boolean>>({
     basic: false,
     hero: false,
+    images: false,
     about: false,
     team: false,
     announcements: false,
@@ -450,6 +451,71 @@ const Settings = ({ schoolId }: SettingsProps) => {
                   placeholder="Learn More"
                   className="mt-2 bg-background/50"
                 />
+              </div>
+            </div>
+          </SectionCard>
+
+          {/* Images Section */}
+          <SectionCard
+            id="images"
+            title="Images"
+            description="Customize hero and robot images (leave empty to use defaults)"
+            isOpen={openSections.images}
+            onToggle={() => toggleSection("images")}
+          >
+            <div className="space-y-4">
+              <div>
+                <Label>Hero Background Image URL</Label>
+                <Input
+                  value={(formData as any).heroImage || ''}
+                  onChange={(e) => updateField("heroImage" as any, e.target.value)}
+                  placeholder="https://your-image-url.com/hero.jpg"
+                  className="mt-2 bg-background/50 font-mono text-sm"
+                />
+                <p className="text-xs text-foreground/60 mt-1">
+                  Leave empty to use default image. Must be a direct image URL.
+                </p>
+              </div>
+              <div>
+                <Label>Robot Image 1 URL</Label>
+                <Input
+                  value={(formData as any).robotImage1 || ''}
+                  onChange={(e) => updateField("robotImage1" as any, e.target.value)}
+                  placeholder="https://your-image-url.com/robot1.jpg"
+                  className="mt-2 bg-background/50 font-mono text-sm"
+                />
+                <p className="text-xs text-foreground/60 mt-1">
+                  First robot showcase image
+                </p>
+              </div>
+              <div>
+                <Label>Robot Image 2 URL</Label>
+                <Input
+                  value={(formData as any).robotImage2 || ''}
+                  onChange={(e) => updateField("robotImage2" as any, e.target.value)}
+                  placeholder="https://your-image-url.com/robot2.jpg"
+                  className="mt-2 bg-background/50 font-mono text-sm"
+                />
+                <p className="text-xs text-foreground/60 mt-1">
+                  Second robot showcase image
+                </p>
+              </div>
+              <div>
+                <Label>Robot Image 3 URL</Label>
+                <Input
+                  value={(formData as any).robotImage3 || ''}
+                  onChange={(e) => updateField("robotImage3" as any, e.target.value)}
+                  placeholder="https://your-image-url.com/robot3.jpg"
+                  className="mt-2 bg-background/50 font-mono text-sm"
+                />
+                <p className="text-xs text-foreground/60 mt-1">
+                  Third robot showcase image
+                </p>
+              </div>
+              <div className="p-4 bg-primary/10 border border-primary/30 rounded-lg">
+                <p className="text-sm text-foreground/80">
+                  <strong>Tip:</strong> You can upload images to services like Imgur, Cloudinary, or your own hosting, then paste the direct image URL here. The URL should end in .jpg, .png, or .webp
+                </p>
               </div>
             </div>
           </SectionCard>
