@@ -12,6 +12,7 @@ import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 import { Compass, ArrowLeft, ShieldCheck } from 'phosphor-react';
 import DecaGlowTemplate from '@/templates/DecaGlowTemplate';
+import RoboticsTemplate from '@/templates/RoboticsTemplate';
 
 export default function ClubWebsite() {
   const { schoolSlug, clubSlug } = useParams<{ schoolSlug: string; clubSlug: string }>();
@@ -161,6 +162,16 @@ export default function ClubWebsite() {
     return (
       <Routes key={`deca-${schoolSlug}-${clubSlug}`}>
         <Route path="/" element={<DecaGlowTemplate key={`deca-template-${templateId}`} />} />
+        <Route path="*" element={<Navigate to={`/${schoolSlug}/${clubSlug}`} replace />} />
+      </Routes>
+    );
+  }
+
+  if (templateName === 'Robotics Tech Template') {
+    console.log('✅ Rendering Robotics Tech Template');
+    return (
+      <Routes key={`robotics-${schoolSlug}-${clubSlug}`}>
+        <Route path="/" element={<RoboticsTemplate key={`robotics-template-${templateId}`} />} />
         <Route path="*" element={<Navigate to={`/${schoolSlug}/${clubSlug}`} replace />} />
       </Routes>
     );
