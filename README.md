@@ -6,7 +6,7 @@
 Student club leaders picked their school, chose a template and filled in a guided setup wizard.
 Each club got a public site at `myhighschool.club/<school>/<club>`, and a school manager approved it before it went live.
 
-> **Status: archived.** myhighschool.club ran from December 2025 to 2026 and has been wound down.
+> **Ran for a school year and reached 10+ Ontario high schools** (July 2025 – 2026).
 > The code and screenshots remain as a record of the project.
 
 ![Landing page](docs/screenshots/landing.png)
@@ -28,6 +28,10 @@ Each club got a public site at `myhighschool.club/<school>/<club>`, and a school
 
 ![School page](docs/screenshots/school.png)
 
+## My role
+
+**Co-founder, deployment lead and full-stack developer.** I built the React front end, the Supabase schema and Row Level Security policies, and the school/manager approval workflow, and I ran deployment on Netlify and Supabase. See [Contributors](#contributors) for the rest of the team.
+
 ## Architecture
 
 ```
@@ -48,11 +52,11 @@ Supabase
 
 ## Tech stack
 
-React 18 · TypeScript · Vite · Tailwind CSS · shadcn/ui (Radix) · Framer Motion · amCharts 5 (globe) · TanStack Query · React Router · Supabase (Postgres, Auth, RLS) · deployed on Netlify
+React 19 · TypeScript · Vite 8 · Tailwind CSS 4 · shadcn/ui (Radix) · Framer Motion · amCharts 5 (globe) · TanStack Query · React Router 7 · Supabase (Postgres, Auth, RLS) · Netlify · GitHub Actions CI
 
 ## Running locally
 
-Requires Node 18+.
+Requires Node 20.19+ or 22.12+ (see `.nvmrc`).
 
 ```bash
 git clone https://github.com/anujmish1229/myhighschool.club.git
@@ -66,6 +70,15 @@ npm run dev            # http://localhost:8080
 `<origin>/dashboard`, and it only redirects to URLs on the project's allow-list.
 The allow-list contains `http://localhost:8080` and the production domain, so the
 dev server is pinned to 8080 in `vite.config.ts`. On any other port, login fails.
+
+### Environment variables
+
+| Name | Purpose |
+|---|---|
+| `VITE_SUPABASE_URL` | Supabase project URL |
+| `VITE_SUPABASE_ANON_KEY` | Supabase anon (public) key. It ships to the browser, so RLS is what protects the data. |
+
+Never put the `service_role` key in this app.
 
 To use your own Supabase project instead, follow [docs/SETUP.md](docs/SETUP.md).
 

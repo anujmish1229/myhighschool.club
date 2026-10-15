@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { useAuth } from '@/context/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { motion } from 'framer-motion';
 import { toast } from 'sonner';
 import RotatingEarth from '@/components/RotatingEarth';
-import { ArrowLeft, GoogleLogo, ShieldCheck } from 'phosphor-react';
+import { ArrowLeft, GoogleLogo, ShieldCheck } from '@phosphor-icons/react';
 
 export default function Login() {
   const { signInWithGoogle, user, loading } = useAuth();
@@ -75,7 +75,7 @@ export default function Login() {
 
   if (loading || isRedirecting) {
     return (
-      <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 px-6 py-24">
+      <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-linear-to-br from-slate-950 via-slate-900 to-blue-950 px-6 py-24">
         <Background />
         <BackButton />
         <div className="relative z-20 glass rounded-3xl px-10 py-12 text-center shadow-2xl">
@@ -106,7 +106,7 @@ export default function Login() {
   }
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 px-6 py-24">
+    <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-linear-to-br from-slate-950 via-slate-900 to-blue-950 px-6 py-24">
       <Background />
       <BackButton />
 

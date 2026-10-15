@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import { WebsiteConfig, defaultConfig } from "@/types/config";
 import { useConfig } from "@/context/ConfigContext";
@@ -182,7 +182,7 @@ const Setup = ({ schoolId }: SetupProps) => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5 py-12 px-6">
+    <div className="min-h-screen bg-linear-to-br from-background via-background to-primary/5 py-12 px-6">
       <div className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

@@ -1,7 +1,7 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
-import { Compass, ArrowLeft } from "phosphor-react";
+import { Compass, ArrowLeft } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
 
 const NotFound = () => {
@@ -37,7 +37,7 @@ const NotFound = () => {
         </div>
         <Button
           onClick={() => navigate('/')}
-          className="glass flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-6 py-3 text-sm font-semibold text-foreground/80 shadow-lg backdrop-blur hover:bg-white/20 hover:text-foreground"
+          className="glass flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-6 py-3 text-sm font-semibold text-foreground/80 shadow-lg backdrop-blur-sm hover:bg-white/20 hover:text-foreground"
         >
           <ArrowLeft size={18} weight="bold" />
           Return to homepage

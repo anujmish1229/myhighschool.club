@@ -1,130 +1,298 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@utility container {
+  margin-inline: auto;
+  padding-inline: 2rem;
+  @media (width >= --theme(--breakpoint-sm)) {
+    max-width: none;
+  }
+  @media (width >= 1400px) {
+    max-width: 1400px;
+  }
+}
+
+@theme inline {
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+  --animate-fade-in-up: fade-in-up 0.8s ease-out;
+  --animate-fade-in: fade-in 0.6s ease-out;
+  --animate-spin-slow: spin-slow 30s linear infinite;
+  --animate-float: float 6s ease-in-out infinite;
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+  @keyframes fade-in-up {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes spin-slow {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+@utility glass {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+@utility glass-card {
+  @apply backdrop-blur-xl bg-card/80 border border-border/50 rounded-xl shadow-xs;
+}
+
+@utility neumorphic {
+  box-shadow: var(--shadow-neumorphic);
+}
+
+@utility neu-button {
+  @apply transition-all duration-300 hover:scale-105 active:scale-95;
+  box-shadow:
+    4px 4px 8px rgba(0, 0, 0, 0.2),
+    -4px -4px 8px rgba(255, 255, 255, 0.1);
+
+  &:hover {
+    box-shadow:
+      6px 6px 12px rgba(0, 0, 0, 0.25),
+      -6px -6px 12px rgba(255, 255, 255, 0.15);
+  }
+
+  &:active {
+    box-shadow:
+      inset 2px 2px 4px rgba(0, 0, 0, 0.2),
+      inset -2px -2px 4px rgba(255, 255, 255, 0.1);
+  }
+}
+
+@utility neu-shadow {
+  box-shadow:
+    4px 4px 8px rgba(0, 0, 0, 0.1),
+    -4px -4px 8px rgba(255, 255, 255, 0.8);
+}
+
+@utility neu-shadow-inset {
+  box-shadow:
+    inset 2px 2px 4px rgba(0, 0, 0, 0.1),
+    inset -2px -2px 4px rgba(255, 255, 255, 0.8);
+}
+
+@utility glow {
+  box-shadow: var(--shadow-glow);
+}
+
+@utility text-gradient {
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@utility perspective-1000 {
+  perspective: 1000px;
+}
+
+@utility preserve-3d {
+  transform-style: preserve-3d;
+}
 
 /* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
 All colors MUST be HSL.
 */
 
-@layer base {
-  :root {
-    --background: 220 40% 6%;
-    --foreground: 210 40% 98%;
+:root {
+  --background: hsl(220 40% 6%);
+  --foreground: hsl(210 40% 98%);
 
-    --card: 220 38% 8%;
-    --card-foreground: 210 40% 98%;
+  --card: hsl(220 38% 8%);
+  --card-foreground: hsl(210 40% 98%);
 
-    --popover: 220 38% 8%;
-    --popover-foreground: 210 40% 98%;
+  --popover: hsl(220 38% 8%);
+  --popover-foreground: hsl(210 40% 98%);
 
-    --primary: 210 100% 65%;
-    --primary-foreground: 220 40% 6%;
+  --primary: hsl(210 100% 65%);
+  --primary-foreground: hsl(220 40% 6%);
 
-    --secondary: 220 35% 12%;
-    --secondary-foreground: 210 40% 98%;
+  --secondary: hsl(220 35% 12%);
+  --secondary-foreground: hsl(210 40% 98%);
 
-    --muted: 220 30% 15%;
-    --muted-foreground: 215 20% 65%;
+  --muted: hsl(220 30% 15%);
+  --muted-foreground: hsl(215 20% 65%);
 
-    --accent: 195 100% 60%;
-    --accent-foreground: 220 40% 6%;
+  --accent: hsl(195 100% 60%);
+  --accent-foreground: hsl(220 40% 6%);
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+  --destructive: hsl(0 84.2% 60.2%);
+  --destructive-foreground: hsl(210 40% 98%);
 
-    --border: 220 30% 18%;
-    --input: 220 30% 15%;
-    --ring: 210 100% 65%;
+  --border: hsl(220 30% 18%);
+  --input: hsl(220 30% 15%);
+  --ring: hsl(210 100% 65%);
 
-    --radius: 1rem;
-    
-    --gradient-primary: linear-gradient(135deg, hsl(220 40% 8%) 0%, hsl(220 38% 10%) 50%, hsl(215 35% 12%) 100%);
-    --gradient-accent: linear-gradient(135deg, hsl(210 100% 65%) 0%, hsl(195 100% 60%) 100%);
-    --glass-bg: hsla(220, 35%, 12%, 0.7);
-    --glass-border: hsla(210, 40%, 98%, 0.1);
-    
-    --shadow-glow: 0 0 40px hsla(210, 100%, 65%, 0.15);
-    --shadow-neumorphic: 8px 8px 16px hsla(220, 40%, 4%, 0.4), -8px -8px 16px hsla(220, 40%, 12%, 0.1);
+  --radius: 1rem;
+  
+  --gradient-primary: linear-gradient(135deg, hsl(220 40% 8%) 0%, hsl(220 38% 10%) 50%, hsl(215 35% 12%) 100%);
+  --gradient-accent: linear-gradient(135deg, hsl(210 100% 65%) 0%, hsl(195 100% 60%) 100%);
+  --glass-bg: hsla(220, 35%, 12%, 0.7);
+  --glass-border: hsla(210, 40%, 98%, 0.1);
+  
+  --shadow-glow: 0 0 40px hsla(210, 100%, 65%, 0.15);
+  --shadow-neumorphic: 8px 8px 16px hsla(220, 40%, 4%, 0.4), -8px -8px 16px hsla(220, 40%, 12%, 0.1);
+}
 
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
+.light-theme {
+  --background: hsl(0 0% 100%);
+  --foreground: hsl(0 0% 9%);
 
-  .light-theme {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 9%;
+  --card: hsl(0 0% 100%);
+  --card-foreground: hsl(0 0% 9%);
 
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 9%;
+  --popover: hsl(0 0% 100%);
+  --popover-foreground: hsl(0 0% 9%);
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 9%;
+  --primary: hsl(217 91% 60%);
+  --primary-foreground: hsl(0 0% 100%);
 
-    --primary: 217 91% 60%;
-    --primary-foreground: 0 0% 100%;
+  --secondary: hsl(0 0% 96%);
+  --secondary-foreground: hsl(0 0% 9%);
 
-    --secondary: 0 0% 96%;
-    --secondary-foreground: 0 0% 9%;
+  --muted: hsl(0 0% 96%);
+  --muted-foreground: hsl(0 0% 45%);
 
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 45%;
+  --accent: hsl(258 90% 66%);
+  --accent-foreground: hsl(0 0% 100%);
 
-    --accent: 258 90% 66%;
-    --accent-foreground: 0 0% 100%;
+  --destructive: hsl(0 84.2% 60.2%);
+  --destructive-foreground: hsl(0 0% 100%);
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 100%;
+  --border: hsl(0 0% 89%);
+  --input: hsl(0 0% 89%);
+  --ring: hsl(0 0% 9%);
 
-    --border: 0 0% 89%;
-    --input: 0 0% 89%;
-    --ring: 0 0% 9%;
+  --radius: 0.5rem;
+}
 
-    --radius: 0.5rem;
-  }
+.dark {
+  --background: hsl(220 40% 6%);
+  --foreground: hsl(210 40% 98%);
 
-  .dark {
-    --background: 220 40% 6%;
-    --foreground: 210 40% 98%;
+  --card: hsl(222.2 84% 4.9%);
+  --card-foreground: hsl(210 40% 98%);
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+  --popover: hsl(222.2 84% 4.9%);
+  --popover-foreground: hsl(210 40% 98%);
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+  --primary: hsl(210 40% 98%);
+  --primary-foreground: hsl(222.2 47.4% 11.2%);
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+  --secondary: hsl(217.2 32.6% 17.5%);
+  --secondary-foreground: hsl(210 40% 98%);
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+  --muted: hsl(217.2 32.6% 17.5%);
+  --muted-foreground: hsl(215 20.2% 65.1%);
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+  --accent: hsl(217.2 32.6% 17.5%);
+  --accent-foreground: hsl(210 40% 98%);
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+  --destructive: hsl(0 62.8% 30.6%);
+  --destructive-foreground: hsl(210 40% 98%);
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
+  --border: hsl(217.2 32.6% 17.5%);
+  --input: hsl(217.2 32.6% 17.5%);
+  --ring: hsl(212.7 26.8% 83.9%);
 }
 
 @layer base {
@@ -144,72 +312,5 @@ All colors MUST be HSL.
   
   p {
     @apply opacity-90;
-  }
-}
-
-@layer utilities {
-  .glass {
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-  }
-
-  .glass-card {
-    @apply backdrop-blur-xl bg-card/80 border border-border/50 rounded-xl shadow-sm;
-  }
-  
-  .neumorphic {
-    box-shadow: var(--shadow-neumorphic);
-  }
-
-  .neu-button {
-    @apply transition-all duration-300 hover:scale-105 active:scale-95;
-    box-shadow: 
-      4px 4px 8px rgba(0, 0, 0, 0.2),
-      -4px -4px 8px rgba(255, 255, 255, 0.1);
-  }
-
-  .neu-button:hover {
-    box-shadow: 
-      6px 6px 12px rgba(0, 0, 0, 0.25),
-      -6px -6px 12px rgba(255, 255, 255, 0.15);
-  }
-
-  .neu-button:active {
-    box-shadow: 
-      inset 2px 2px 4px rgba(0, 0, 0, 0.2),
-      inset -2px -2px 4px rgba(255, 255, 255, 0.1);
-  }
-
-  .neu-shadow {
-    box-shadow: 
-      4px 4px 8px rgba(0, 0, 0, 0.1),
-      -4px -4px 8px rgba(255, 255, 255, 0.8);
-  }
-
-  .neu-shadow-inset {
-    box-shadow: 
-      inset 2px 2px 4px rgba(0, 0, 0, 0.1),
-      inset -2px -2px 4px rgba(255, 255, 255, 0.8);
-  }
-  
-  .glow {
-    box-shadow: var(--shadow-glow);
-  }
-  
-  .text-gradient {
-    background: var(--gradient-accent);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  
-  .perspective-1000 {
-    perspective: 1000px;
-  }
-  
-  .preserve-3d {
-    transform-style: preserve-3d;
   }
 }

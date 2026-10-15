@@ -257,12 +257,12 @@ const RoboticsTemplate = () => {
   return (
     <div
       style={cssVars}
-      className="min-h-screen bg-[var(--template-background)] text-[var(--template-foreground)]"
+      className="min-h-screen bg-(--template-background) text-(--template-foreground)"
     >
       {/* Header */}
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled ? 'bg-[var(--template-background)]/80 backdrop-blur-md border-b border-[var(--template-border)]' : 'bg-transparent'
+          scrolled ? 'bg-(--template-background)/80 backdrop-blur-md border-b border-(--template-border)' : 'bg-transparent'
         }`}
       >
         <nav className="container mx-auto px-4 py-4 flex items-center justify-between">
@@ -271,14 +271,14 @@ const RoboticsTemplate = () => {
             className="flex items-center gap-2 transition-opacity hover:opacity-80"
           >
             <div
-              className="h-10 w-10 rounded-lg flex items-center justify-center font-bold text-xl text-[var(--template-primary-foreground)]"
+              className="h-10 w-10 rounded-lg flex items-center justify-center font-bold text-xl text-(--template-primary-foreground)"
               style={{
                 background: `linear-gradient(135deg, ${primaryColor}, ${accentColor})`,
               }}
             >
               {config.clubName?.substring(0, 2).toUpperCase() || 'RT'}
             </div>
-            <span className="font-bold text-xl text-[var(--template-foreground)]">
+            <span className="font-bold text-xl text-(--template-foreground)">
               {config.clubName || 'RoboTech Team'}
             </span>
           </button>
@@ -289,14 +289,14 @@ const RoboticsTemplate = () => {
               <button
                 key={link.target}
                 onClick={() => scrollToSection(link.target)}
-                className="text-[var(--template-muted-foreground)] hover:text-[var(--template-foreground)] transition-colors"
+                className="text-(--template-muted-foreground) hover:text-(--template-foreground) transition-colors"
               >
                 {link.label}
               </button>
             ))}
             <Button
               onClick={() => scrollToSection('announcements')}
-              className="text-[var(--template-primary-foreground)] transition-all hover:shadow-[0_0_40px_var(--template-primary)]"
+              className="text-(--template-primary-foreground) transition-all hover:shadow-[0_0_40px_var(--template-primary)]"
               style={{
                 background: `linear-gradient(135deg, ${primaryColor}, ${accentColor})`,
               }}
@@ -307,7 +307,7 @@ const RoboticsTemplate = () => {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-[var(--template-foreground)]"
+            className="md:hidden text-(--template-foreground)"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -316,20 +316,20 @@ const RoboticsTemplate = () => {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden bg-[var(--template-card)] border-b border-[var(--template-border)] px-4 py-4">
+          <div className="md:hidden bg-(--template-card) border-b border-(--template-border) px-4 py-4">
             <div className="flex flex-col gap-3">
               {NAV_LINKS.map((link) => (
                 <button
                   key={link.target}
                   onClick={() => scrollToSection(link.target)}
-                  className="text-[var(--template-muted-foreground)] hover:text-[var(--template-foreground)] transition-colors text-left py-2"
+                  className="text-(--template-muted-foreground) hover:text-(--template-foreground) transition-colors text-left py-2"
                 >
                   {link.label}
                 </button>
               ))}
               <Button
                 onClick={() => scrollToSection('announcements')}
-                className="w-full text-[var(--template-primary-foreground)] mt-2"
+                className="w-full text-(--template-primary-foreground) mt-2"
                 style={{
                   background: `linear-gradient(135deg, ${primaryColor}, ${accentColor})`,
                 }}
@@ -351,7 +351,7 @@ const RoboticsTemplate = () => {
               filter: 'brightness(0.4)',
             }}
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[var(--template-background)]/50 to-[var(--template-background)]" />
+          <div className="absolute inset-0 bg-linear-to-b from-(--template-background)/50 to-(--template-background)" />
 
           <div className="relative z-10 container mx-auto px-4 text-center pt-20">
             <div
@@ -378,7 +378,7 @@ const RoboticsTemplate = () => {
               {config.heroTitle || config.clubName || 'RoboTech Team'}
             </h1>
 
-            <p className="text-xl md:text-2xl text-[var(--template-muted-foreground)] max-w-2xl mx-auto mb-8">
+            <p className="text-xl md:text-2xl text-(--template-muted-foreground) max-w-2xl mx-auto mb-8">
               {config.heroSubtitle || 'Building the future, one robot at a time. Innovation, teamwork, and excellence in robotics.'}
             </p>
 
@@ -386,7 +386,7 @@ const RoboticsTemplate = () => {
               <Button
                 size="lg"
                 onClick={() => scrollToSection('about')}
-                className="text-lg px-8 text-[var(--template-primary-foreground)] transition-all hover:shadow-[0_0_40px_var(--template-primary)]"
+                className="text-lg px-8 text-(--template-primary-foreground) transition-all hover:shadow-[0_0_40px_var(--template-primary)]"
                 style={{
                   background: `linear-gradient(135deg, ${primaryColor}, ${accentColor})`,
                 }}
@@ -398,7 +398,7 @@ const RoboticsTemplate = () => {
                 size="lg"
                 variant="outline"
                 onClick={() => scrollToSection('announcements')}
-                className="text-lg px-8 border-[var(--template-primary)] hover:bg-[var(--template-primary)]/10"
+                className="text-lg px-8 border-(--template-primary) hover:bg-(--template-primary)/10"
                 style={{ 
                   borderColor: primaryColor,
                   color: primaryColor,
@@ -417,7 +417,7 @@ const RoboticsTemplate = () => {
               <h2 className="text-4xl md:text-5xl font-bold mb-4">
                 {config.aboutTitle || 'About Our Team'}
               </h2>
-              <p className="text-xl text-[var(--template-muted-foreground)] max-w-3xl mx-auto">
+              <p className="text-xl text-(--template-muted-foreground) max-w-3xl mx-auto">
                 {config.aboutDescription ||
                   'We are a student-led robotics team dedicated to designing, building, and programming competitive robots while fostering skills in STEM, teamwork, and leadership.'}
               </p>
@@ -427,7 +427,7 @@ const RoboticsTemplate = () => {
               {achievements.map((achievement, index) => (
                 <Card
                   key={index}
-                  className="bg-[var(--template-card)] border-[var(--template-border)] text-center transition-all hover:shadow-[0_0_30px_var(--template-primary)] hover:border-[var(--template-primary)]/50 w-full sm:w-[calc(50%-1rem)] lg:w-[calc(25%-1.5rem)] max-w-sm"
+                  className="bg-(--template-card) border-(--template-border) text-center transition-all hover:shadow-[0_0_30px_var(--template-primary)] hover:border-(--template-primary)/50 w-full sm:w-[calc(50%-1rem)] lg:w-[calc(25%-1.5rem)] max-w-sm"
                 >
                   <CardContent className="p-6">
                     <div
@@ -439,18 +439,18 @@ const RoboticsTemplate = () => {
                       <achievement.icon className="h-8 w-8" style={{ color: 'var(--template-primary-foreground)' }} />
                     </div>
                     <h3 className="text-xl font-bold mb-2">{achievement.title}</h3>
-                    <p className="text-[var(--template-muted-foreground)]">{achievement.description}</p>
+                    <p className="text-(--template-muted-foreground)">{achievement.description}</p>
                   </CardContent>
                 </Card>
               ))}
             </div>
 
             {/* Mission Statement */}
-            <div className="mt-16 max-w-4xl mx-auto bg-[var(--template-card)] border border-[var(--template-border)] rounded-lg p-8 md:p-10">
+            <div className="mt-16 max-w-4xl mx-auto bg-(--template-card) border border-(--template-border) rounded-lg p-8 md:p-10">
               <h3 className="text-2xl md:text-3xl font-bold mb-4">
                 {config.missionTitle || 'Our Mission'}
               </h3>
-              <p className="text-lg text-[var(--template-muted-foreground)]">
+              <p className="text-lg text-(--template-muted-foreground)">
                 {config.missionDescription ||
                   'To inspire and empower students through hands-on robotics experience, fostering innovation, critical thinking, and collaborative problem-solving in a supportive environment.'}
               </p>
@@ -459,11 +459,11 @@ const RoboticsTemplate = () => {
         </section>
 
         {/* Team Departments Section */}
-        <section id="team" className="py-20 bg-[var(--template-muted)]/30">
+        <section id="team" className="py-20 bg-(--template-muted)/30">
           <div className="container mx-auto px-4">
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold mb-4">Our Team</h2>
-              <p className="text-xl text-[var(--template-muted-foreground)] max-w-3xl mx-auto">
+              <p className="text-xl text-(--template-muted-foreground) max-w-3xl mx-auto">
                 Our team is organized into specialized departments, each contributing unique skills and perspectives to create championship-winning robots.
               </p>
             </div>
@@ -472,7 +472,7 @@ const RoboticsTemplate = () => {
               {departments.map((dept, index) => (
                 <Card
                   key={index}
-                  className="bg-[var(--template-card)]/50 backdrop-blur border-[var(--template-border)] transition-all hover:shadow-[0_0_30px_var(--template-primary)] hover:border-[var(--template-primary)]/50 w-full max-w-sm"
+                  className="bg-(--template-card)/50 backdrop-blur-sm border-(--template-border) transition-all hover:shadow-[0_0_30px_var(--template-primary)] hover:border-(--template-primary)/50 w-full max-w-sm"
                 >
                   <CardContent className="p-6 text-center">
                     <div
@@ -484,7 +484,7 @@ const RoboticsTemplate = () => {
                       <dept.icon className="h-7 w-7 text-white" />
                     </div>
                     <h3 className="text-2xl font-bold mb-2">{dept.name}</h3>
-                    <p className="text-[var(--template-muted-foreground)]">{dept.description}</p>
+                    <p className="text-(--template-muted-foreground)">{dept.description}</p>
                   </CardContent>
                 </Card>
               ))}
@@ -498,7 +498,7 @@ const RoboticsTemplate = () => {
                   {teamMembers.map((member, idx) => (
                     <Card
                       key={`${member.name}-${idx}`}
-                      className="bg-[var(--template-card)] border-[var(--template-border)] overflow-hidden transition-all hover:shadow-[0_0_30px_var(--template-primary)] hover:border-[var(--template-primary)]/50 w-full max-w-sm"
+                      className="bg-(--template-card) border-(--template-border) overflow-hidden transition-all hover:shadow-[0_0_30px_var(--template-primary)] hover:border-(--template-primary)/50 w-full max-w-sm"
                     >
                       <CardContent className="p-6">
                         <div
@@ -516,7 +516,7 @@ const RoboticsTemplate = () => {
                         >
                           {member.role}
                         </p>
-                        <p className="mt-3 text-center text-sm text-[var(--template-muted-foreground)]">{member.bio}</p>
+                        <p className="mt-3 text-center text-sm text-(--template-muted-foreground)">{member.bio}</p>
                       </CardContent>
                     </Card>
                   ))}
@@ -526,7 +526,7 @@ const RoboticsTemplate = () => {
 
             {/* Meeting Info */}
             <div className="mt-16 text-center">
-              <p className="text-lg text-[var(--template-muted-foreground)] mb-6">
+              <p className="text-lg text-(--template-muted-foreground) mb-6">
                 Want to be part of something amazing? We welcome students with all skill levels and interests!
               </p>
               <div className="flex flex-wrap justify-center gap-4">
@@ -564,7 +564,7 @@ const RoboticsTemplate = () => {
           <div className="container mx-auto px-4">
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold mb-4">Our Robots</h2>
-              <p className="text-xl text-[var(--template-muted-foreground)] max-w-3xl mx-auto">
+              <p className="text-xl text-(--template-muted-foreground) max-w-3xl mx-auto">
                 Each season brings new challenges and opportunities to showcase our engineering excellence.
               </p>
             </div>
@@ -573,9 +573,9 @@ const RoboticsTemplate = () => {
               {robots.map((robot, index) => (
                 <Card
                   key={index}
-                  className="overflow-hidden bg-[var(--template-card)] border-[var(--template-border)] transition-all hover:shadow-[0_0_30px_var(--template-primary)] hover:border-[var(--template-primary)]/50 group w-full max-w-sm"
+                  className="overflow-hidden bg-(--template-card) border-(--template-border) transition-all hover:shadow-[0_0_30px_var(--template-primary)] hover:border-(--template-primary)/50 group w-full max-w-sm"
                 >
-                  <div className="aspect-square overflow-hidden bg-[var(--template-muted)]">
+                  <div className="aspect-square overflow-hidden bg-(--template-muted)">
                     <img
                       src={robot.image}
                       alt={robot.name}
@@ -596,7 +596,7 @@ const RoboticsTemplate = () => {
                         {robot.year}
                       </span>
                     </div>
-                    <p className="text-[var(--template-muted-foreground)]">{robot.description}</p>
+                    <p className="text-(--template-muted-foreground)">{robot.description}</p>
                   </CardContent>
                 </Card>
               ))}
@@ -606,11 +606,11 @@ const RoboticsTemplate = () => {
 
         {/* Announcements Section */}
         {announcements.length > 0 && (
-          <section id="announcements" className="py-20 bg-[var(--template-muted)]/30">
+          <section id="announcements" className="py-20 bg-(--template-muted)/30">
             <div className="container mx-auto px-4">
               <div className="text-center mb-16">
                 <h2 className="text-4xl md:text-5xl font-bold mb-4">Announcements</h2>
-                <p className="text-xl text-[var(--template-muted-foreground)] max-w-3xl mx-auto">
+                <p className="text-xl text-(--template-muted-foreground) max-w-3xl mx-auto">
                   Stay updated with the latest news and events from our team.
                 </p>
               </div>
@@ -619,12 +619,12 @@ const RoboticsTemplate = () => {
                 {announcements.map((announcement, index) => (
                   <Card
                     key={index}
-                    className="bg-[var(--template-card)] border-[var(--template-border)] transition-all hover:shadow-[0_0_30px_var(--template-primary)] hover:border-[var(--template-primary)]/50"
+                    className="bg-(--template-card) border-(--template-border) transition-all hover:shadow-[0_0_30px_var(--template-primary)] hover:border-(--template-primary)/50"
                   >
                     <CardContent className="p-6">
                       <div className="flex items-start gap-4">
                         <div
-                          className="flex-shrink-0 w-12 h-12 rounded-lg flex items-center justify-center"
+                          className="shrink-0 w-12 h-12 rounded-lg flex items-center justify-center"
                           style={{
                             background: `linear-gradient(135deg, ${primaryColor}, ${accentColor})`,
                           }}
@@ -645,11 +645,11 @@ const RoboticsTemplate = () => {
                               {announcement.priority}
                             </span>
                           </div>
-                          <div className="flex items-center gap-2 text-sm text-[var(--template-muted-foreground)] mb-3">
+                          <div className="flex items-center gap-2 text-sm text-(--template-muted-foreground) mb-3">
                             <CalendarIcon className="h-4 w-4" />
                             <span>{announcement.date}</span>
                           </div>
-                          <p className="text-[var(--template-muted-foreground)]">{announcement.content}</p>
+                          <p className="text-(--template-muted-foreground)">{announcement.content}</p>
                         </div>
                       </div>
                     </CardContent>
@@ -666,7 +666,7 @@ const RoboticsTemplate = () => {
             <div className="container mx-auto px-4">
               <div className="text-center mb-16">
                 <h2 className="text-4xl md:text-5xl font-bold mb-4">Upcoming Events</h2>
-                <p className="text-xl text-[var(--template-muted-foreground)] max-w-3xl mx-auto">
+                <p className="text-xl text-(--template-muted-foreground) max-w-3xl mx-auto">
                   Check out our schedule and join us for upcoming meetings and competitions.
                 </p>
               </div>
@@ -676,7 +676,7 @@ const RoboticsTemplate = () => {
                 <div className="flex items-center justify-between mb-6">
                   <button
                     onClick={goToPreviousMonth}
-                    className="p-2 rounded-lg hover:bg-[var(--template-muted)] transition-colors"
+                    className="p-2 rounded-lg hover:bg-(--template-muted) transition-colors"
                     style={{ color: primaryColor }}
                   >
                     <ChevronLeft className="h-6 w-6" />
@@ -684,7 +684,7 @@ const RoboticsTemplate = () => {
                   <h3 className="text-2xl font-bold">{format(currentDate, 'MMMM yyyy')}</h3>
                   <button
                     onClick={goToNextMonth}
-                    className="p-2 rounded-lg hover:bg-[var(--template-muted)] transition-colors"
+                    className="p-2 rounded-lg hover:bg-(--template-muted) transition-colors"
                     style={{ color: primaryColor }}
                   >
                     <ChevronRight className="h-6 w-6" />
@@ -692,12 +692,12 @@ const RoboticsTemplate = () => {
                 </div>
 
                 {/* Calendar Grid */}
-                <Card className="bg-[var(--template-card)] border-[var(--template-border)] mb-8">
+                <Card className="bg-(--template-card) border-(--template-border) mb-8">
                   <CardContent className="p-6">
                     <div className="grid grid-cols-7 gap-2">
                       {/* Day headers */}
                       {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day) => (
-                        <div key={day} className="text-center text-sm font-semibold text-[var(--template-muted-foreground)] py-2">
+                        <div key={day} className="text-center text-sm font-semibold text-(--template-muted-foreground) py-2">
                           {day}
                         </div>
                       ))}
@@ -720,8 +720,8 @@ const RoboticsTemplate = () => {
                               isCurrentDay
                                 ? 'border-2'
                                 : hasEvents
-                                  ? 'border border-[var(--template-primary)]/30'
-                                  : 'hover:bg-[var(--template-muted)]/20'
+                                  ? 'border border-(--template-primary)/30'
+                                  : 'hover:bg-(--template-muted)/20'
                             }`}
                             style={{
                               backgroundColor: isCurrentDay
@@ -739,7 +739,7 @@ const RoboticsTemplate = () => {
                                     ? 'font-bold'
                                     : hasEvents
                                       ? 'font-semibold'
-                                      : 'text-[var(--template-muted-foreground)]'
+                                      : 'text-(--template-muted-foreground)'
                                 }`}
                                 style={{
                                   color: isCurrentDay || hasEvents ? primaryColor : undefined,
@@ -772,13 +772,13 @@ const RoboticsTemplate = () => {
                       .map((event, index) => (
                         <Card
                           key={index}
-                          className="bg-[var(--template-card)] border-[var(--template-border)] transition-all hover:shadow-[0_0_30px_var(--template-primary)] hover:border-[var(--template-primary)]/50"
+                          className="bg-(--template-card) border-(--template-border) transition-all hover:shadow-[0_0_30px_var(--template-primary)] hover:border-(--template-primary)/50"
                         >
                           <CardContent className="p-6">
                             <div className="flex items-start justify-between">
                               <div className="flex-1">
                                 <h4 className="font-bold text-lg mb-2">{event.title}</h4>
-                                <p className="text-sm text-[var(--template-muted-foreground)]">{event.description}</p>
+                                <p className="text-sm text-(--template-muted-foreground)">{event.description}</p>
                               </div>
                               <div className="text-right ml-4">
                                 <div
@@ -787,7 +787,7 @@ const RoboticsTemplate = () => {
                                 >
                                   {format(new Date(event.date), 'MMM d')}
                                 </div>
-                                <div className="text-xs text-[var(--template-muted-foreground)]">
+                                <div className="text-xs text-(--template-muted-foreground)">
                                   {format(new Date(event.date), 'h:mm a')}
                                 </div>
                               </div>
@@ -811,10 +811,10 @@ const RoboticsTemplate = () => {
                 {faqs.map((faq, idx) => (
                   <details
                     key={`${faq.question}-${idx}`}
-                    className="rounded-xl border border-[var(--template-border)] bg-[var(--template-card)] p-5"
+                    className="rounded-xl border border-(--template-border) bg-(--template-card) p-5"
                   >
                     <summary className="cursor-pointer text-lg font-semibold">{faq.question}</summary>
-                    <p className="mt-3 text-sm text-[var(--template-muted-foreground)]">{faq.answer}</p>
+                    <p className="mt-3 text-sm text-(--template-muted-foreground)">{faq.answer}</p>
                   </details>
                 ))}
               </div>
@@ -824,7 +824,7 @@ const RoboticsTemplate = () => {
       </main>
 
       {/* Footer */}
-      <footer className="bg-[var(--template-card)] border-t border-[var(--template-border)] py-12">
+      <footer className="bg-(--template-card) border-t border-(--template-border) py-12">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
             <div className="flex items-center gap-3">
@@ -839,16 +839,16 @@ const RoboticsTemplate = () => {
               </div>
               <div>
                 <p className="font-semibold">{config.clubName || 'RoboTech Team'}</p>
-                <p className="text-sm text-[var(--template-muted-foreground)]">{config.clubTagline || 'FRC Team #XXXX'}</p>
+                <p className="text-sm text-(--template-muted-foreground)">{config.clubTagline || 'FRC Team #XXXX'}</p>
               </div>
             </div>
-            <div className="text-sm text-[var(--template-muted-foreground)]">
+            <div className="text-sm text-(--template-muted-foreground)">
               <p>© {new Date().getFullYear()} {config.clubName || 'RoboTech Team'}. All rights reserved.</p>
               <p className="text-xs mt-1">Building the future through robotics.</p>
             </div>
           </div>
           <div className="mt-6 text-center">
-            <p className="text-xs text-[var(--template-muted-foreground)]">
+            <p className="text-xs text-(--template-muted-foreground)">
               Powered by{' '}
               <a
                 href="https://myhighschool.club"

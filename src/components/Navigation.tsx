@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { List, X, LockKey } from "phosphor-react";
+import { List, X, LockKey } from "@phosphor-icons/react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -113,7 +113,7 @@ const Navigation = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsOpen(false)}
-              className="fixed inset-0 bg-background/80 backdrop-blur-sm md:hidden"
+              className="fixed inset-0 bg-background/80 backdrop-blur-xs md:hidden"
               style={{ top: "72px" }}
             />
 

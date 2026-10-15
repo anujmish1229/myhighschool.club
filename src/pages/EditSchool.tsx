@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router';
 import { motion } from 'framer-motion';
-import { ArrowLeft, ShieldCheck } from 'phosphor-react';
+import { ArrowLeft, ShieldCheck } from '@phosphor-icons/react';
 import { useAuth } from '@/context/AuthContext';
 import { useConfig } from '@/context/ConfigContext';
 import { supabase } from '@/lib/supabase';
@@ -115,7 +115,7 @@ export default function EditSchool({ isSetup = false }: EditSchoolProps) {
         <Button
           onClick={() => navigate('/dashboard')}
           variant="ghost"
-          className="glass flex w-fit items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm text-foreground/80 shadow-lg backdrop-blur hover:bg-white/20 hover:text-foreground"
+          className="glass flex w-fit items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm text-foreground/80 shadow-lg backdrop-blur-sm hover:bg-white/20 hover:text-foreground"
         >
           <ArrowLeft size={18} weight="bold" />
           Back to dashboard

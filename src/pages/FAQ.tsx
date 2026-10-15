@@ -37,7 +37,7 @@ const FAQ = () => {
                     <CaretDown
                       size={24}
                       weight="light"
-                      className={`transition-transform flex-shrink-0 ${
+                      className={`transition-transform shrink-0 ${
                         openIndex === index ? "rotate-180" : ""
                       }`}
                     />

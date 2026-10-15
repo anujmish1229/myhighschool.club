@@ -1,5 +1,5 @@
-import { EnvelopeSimple, Phone, MapPin, GithubLogo, TwitterLogo, LinkedinLogo } from "phosphor-react";
-import { Link } from "react-router-dom";
+import { EnvelopeSimple, Phone, MapPin, GithubLogo, TwitterLogo, LinkedinLogo } from "@phosphor-icons/react";
+import { Link } from "react-router";
 
 const Footer = () => {
   const scrollToSection = (hash: string) => {

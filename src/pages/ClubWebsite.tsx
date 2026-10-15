@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { useParams, Routes, Route, Navigate, useNavigate } from 'react-router';
 import { useConfig } from '@/context/ConfigContext';
 import { getSchoolBySlug } from '@/data/ontarioSchools';
 import ClubHome from './ClubHome';
@@ -10,7 +10,7 @@ import FAQ from './FAQ';
 import Announcements from './Announcements';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
-import { Compass, ArrowLeft, ShieldCheck } from 'phosphor-react';
+import { Compass, ArrowLeft, ShieldCheck } from '@phosphor-icons/react';
 import DecaGlowTemplate from '@/templates/DecaGlowTemplate';
 import RoboticsTemplate from '@/templates/RoboticsTemplate';
 
@@ -110,7 +110,7 @@ export default function ClubWebsite() {
           </div>
           <Button
             onClick={() => navigate('/')}
-            className="glass flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-6 py-3 text-sm font-semibold text-foreground/80 shadow-lg backdrop-blur hover:bg-white/20 hover:text-foreground"
+            className="glass flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-6 py-3 text-sm font-semibold text-foreground/80 shadow-lg backdrop-blur-sm hover:bg-white/20 hover:text-foreground"
           >
             <ArrowLeft size={18} weight="bold" />
             Return to homepage
@@ -147,7 +147,7 @@ export default function ClubWebsite() {
           </div>
           <Button
             onClick={() => navigate('/')}
-            className="glass flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-6 py-3 text-sm font-semibold text-foreground/80 shadow-lg backdrop-blur hover:bg-white/20 hover:text-foreground"
+            className="glass flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-6 py-3 text-sm font-semibold text-foreground/80 shadow-lg backdrop-blur-sm hover:bg-white/20 hover:text-foreground"
           >
             <ArrowLeft size={18} weight="bold" />
             Back to homepage

@@ -12,7 +12,7 @@ const ClubHome = () => {
     <PageLayout>
       {/* Hero Section */}
       <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-background via-muted to-primary/5" />
+        <div className="absolute inset-0 bg-linear-to-br from-background via-muted to-primary/5" />
         
         <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
           <motion.div

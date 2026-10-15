@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { useAuth } from '@/context/AuthContext';
 import { supabase } from '@/lib/supabase';
 import { getErrorMessage } from '@/lib/utils';
@@ -12,7 +12,7 @@ import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
 import { motion } from 'framer-motion';
 import { PlusCircle, Globe, Settings, LogOut, ExternalLink, Clock, CheckCircle } from 'lucide-react';
-import { Notebook, Lightning, UsersThree, ShieldCheck, ArrowRight } from 'phosphor-react';
+import { Notebook, Lightning, UsersThree, ShieldCheck, ArrowRight } from '@phosphor-icons/react';
 import RotatingEarth from '@/components/RotatingEarth';
 import { ontarioSchools, searchSchools } from '@/data/ontarioSchools';
 import type { School as HighSchool } from '@/data/ontarioSchools';
@@ -191,14 +191,14 @@ export default function Dashboard() {
       </div>
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute -top-20 -left-32 h-96 w-96 rounded-full bg-primary/30 blur-3xl" />
-        <div className="absolute bottom-10 right-10 h-[22rem] w-[22rem] rounded-full bg-accent/20 blur-3xl" />
+        <div className="absolute bottom-10 right-10 h-88 w-88 rounded-full bg-accent/20 blur-3xl" />
         <div className="absolute top-1/2 left-1/2 h-64 w-64 -translate-x-1/2 rounded-full bg-blue-500/10 blur-3xl" />
       </div>
     </>
   );
 
   const LoadingState = () => (
-    <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 px-6 py-24">
+    <div className="relative min-h-screen overflow-hidden bg-linear-to-br from-slate-950 via-slate-900 to-blue-950 px-6 py-24">
       <Background />
       <div className="relative z-20 mx-auto flex max-w-md flex-col items-center gap-6 rounded-3xl border border-white/10 bg-background/60 p-10 text-center shadow-2xl backdrop-blur-xl">
         <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/20 text-primary">
@@ -222,7 +222,7 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 px-4 py-16 sm:px-6">
+    <div className="relative min-h-screen overflow-hidden bg-linear-to-br from-slate-950 via-slate-900 to-blue-950 px-4 py-16 sm:px-6">
       <Background />
 
       <div className="relative z-20 mx-auto flex w-full max-w-6xl flex-col gap-10">
@@ -336,7 +336,7 @@ export default function Dashboard() {
                         className="bg-white/5"
                       />
                       {showSchoolDropdown && !selectedHighSchool && (
-                        <div className="absolute z-30 mt-1 max-h-60 w-full overflow-y-auto rounded-xl border border-white/10 bg-background/95 shadow-xl backdrop-blur">
+                        <div className="absolute z-30 mt-1 max-h-60 w-full overflow-y-auto rounded-xl border border-white/10 bg-background/95 shadow-xl backdrop-blur-sm">
                           {filteredSchools.length > 0 ? (
                             filteredSchools.map((school) => (
                               <button
