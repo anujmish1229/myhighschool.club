@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 import { supabase } from '@/lib/supabase';
+import { getErrorMessage } from '@/lib/utils';
+import type { WebsiteConfig } from '@/types/config';
 import { getManagedSchools } from '@/lib/managerUtils';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -16,7 +18,7 @@ interface Club {
   id: string;
   high_school_slug: string;
   club_slug: string;
-  config: any;
+  config: Partial<WebsiteConfig>;
   created_at: string;
   user_id: string;
   status: 'pending' | 'approved';
@@ -79,9 +81,9 @@ export default function ManagerDashboard() {
 
       if (allError) throw allError;
       setAllClubs(allData || []);
-    } catch (error: any) {
+    } catch (error) {
       console.error('Error loading manager data:', error);
-      toast.error('Failed to load manager data: ' + error.message);
+      toast.error('Failed to load manager data: ' + getErrorMessage(error));
     } finally {
       setLoading(false);
     }
@@ -99,9 +101,9 @@ export default function ManagerDashboard() {
 
       toast.success('Club approved successfully!');
       loadManagerData(); // Reload data
-    } catch (error: any) {
+    } catch (error) {
       console.error('Error approving club:', error);
-      toast.error('Failed to approve club: ' + error.message);
+      toast.error('Failed to approve club: ' + getErrorMessage(error));
     } finally {
       setProcessingClubId(null);
     }
@@ -123,9 +125,9 @@ export default function ManagerDashboard() {
 
       toast.success('Club rejected and removed');
       loadManagerData(); // Reload data
-    } catch (error: any) {
+    } catch (error) {
       console.error('Error rejecting club:', error);
-      toast.error('Failed to reject club: ' + error.message);
+      toast.error('Failed to reject club: ' + getErrorMessage(error));
     } finally {
       setProcessingClubId(null);
     }
@@ -147,9 +149,9 @@ export default function ManagerDashboard() {
 
       toast.success('Club deleted successfully');
       loadManagerData(); // Reload data
-    } catch (error: any) {
+    } catch (error) {
       console.error('Error deleting club:', error);
-      toast.error('Failed to delete club: ' + error.message);
+      toast.error('Failed to delete club: ' + getErrorMessage(error));
     } finally {
       setProcessingClubId(null);
     }
