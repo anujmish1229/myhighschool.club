@@ -80,3 +80,10 @@ To use your own Supabase project instead, follow [docs/SETUP.md](docs/SETUP.md).
 
 - [docs/SETUP.md](docs/SETUP.md): create the database, configure Google OAuth, troubleshooting
 - [docs/ADMIN.md](docs/ADMIN.md): roles, adding school managers, approving clubs
+
+## Contributors
+
+- **Anuj Mishra** ([@anujmish1229](https://github.com/anujmish1229))
+- **Momin Shahid** ([@Endeyexe](https://github.com/Endeyexe))
+- **Aaron Merchant** ([@aaronkoolkoder](https://github.com/aaronkoolkoder))
+- **Victor Pollanen** ([@kimchiburgerss](https://github.com/kimchiburgerss))
