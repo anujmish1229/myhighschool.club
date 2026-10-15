@@ -34,7 +34,7 @@ const Setup = ({ schoolId }: SetupProps) => {
   const primaryColorPickerValue = resolveHexColor(formData.primaryColor, DEFAULT_PRIMARY_HEX);
   const accentColorPickerValue = resolveHexColor(formData.accentColor, DEFAULT_ACCENT_HEX);
 
-  const updateField = (field: keyof WebsiteConfig, value: any) => {
+  const updateField = <K extends keyof WebsiteConfig>(field: K, value: WebsiteConfig[K]) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 

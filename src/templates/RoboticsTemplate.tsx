@@ -61,9 +61,9 @@ const hexToHSL = (hex: string): string => {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   if (!result) return DEFAULT_PRIMARY;
   
-  let r = parseInt(result[1], 16) / 255;
-  let g = parseInt(result[2], 16) / 255;
-  let b = parseInt(result[3], 16) / 255;
+  const r = parseInt(result[1], 16) / 255;
+  const g = parseInt(result[2], 16) / 255;
+  const b = parseInt(result[3], 16) / 255;
 
   const max = Math.max(r, g, b);
   const min = Math.min(r, g, b);
@@ -150,10 +150,10 @@ const RoboticsTemplate = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
 
   // Get images from config or use defaults
-  const heroImage = (config as any).heroImage || DEFAULT_HERO_IMAGE;
-  const robotImage1 = (config as any).robotImage1 || DEFAULT_ROBOT_1;
-  const robotImage2 = (config as any).robotImage2 || DEFAULT_ROBOT_2;
-  const robotImage3 = (config as any).robotImage3 || DEFAULT_ROBOT_3;
+  const heroImage = config.heroImage || DEFAULT_HERO_IMAGE;
+  const robotImage1 = config.robotImage1 || DEFAULT_ROBOT_1;
+  const robotImage2 = config.robotImage2 || DEFAULT_ROBOT_2;
+  const robotImage3 = config.robotImage3 || DEFAULT_ROBOT_3;
 
   const achievements = announcements.length > 0
     ? announcements.map((announcement, index) => ({

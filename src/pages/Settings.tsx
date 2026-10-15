@@ -29,6 +29,7 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { supabase } from "@/lib/supabase";
+import { getErrorMessage } from "@/lib/utils";
 
 interface SettingsProps {
   schoolId?: string;
@@ -113,7 +114,7 @@ const Settings = ({ schoolId }: SettingsProps) => {
   const primaryColorPickerValue = resolveHexColor(formData.primaryColor, DEFAULT_PRIMARY_HEX);
   const accentColorPickerValue = resolveHexColor(formData.accentColor, DEFAULT_ACCENT_HEX);
 
-  const updateField = (field: keyof WebsiteConfig, value: any) => {
+  const updateField = <K extends keyof WebsiteConfig>(field: K, value: WebsiteConfig[K]) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
@@ -307,8 +308,8 @@ const Settings = ({ schoolId }: SettingsProps) => {
         toast.success('Club website deleted successfully');
         setShowDeleteDialog(false);
         navigate('/dashboard');
-      } catch (error: any) {
-        toast.error('Failed to delete club: ' + (error.message || 'Unknown error'));
+      } catch (error) {
+        toast.error('Failed to delete club: ' + (getErrorMessage(error) || 'Unknown error'));
         console.error(error);
       } finally {
         setDeleting(false);
@@ -467,8 +468,8 @@ const Settings = ({ schoolId }: SettingsProps) => {
               <div>
                 <Label>Hero Background Image URL</Label>
                 <Input
-                  value={(formData as any).heroImage || ''}
-                  onChange={(e) => updateField("heroImage" as any, e.target.value)}
+                  value={formData.heroImage || ''}
+                  onChange={(e) => updateField("heroImage", e.target.value)}
                   placeholder="https://your-image-url.com/hero.jpg"
                   className="mt-2 bg-background/50 font-mono text-sm"
                 />
@@ -479,8 +480,8 @@ const Settings = ({ schoolId }: SettingsProps) => {
               <div>
                 <Label>Robot Image 1 URL</Label>
                 <Input
-                  value={(formData as any).robotImage1 || ''}
-                  onChange={(e) => updateField("robotImage1" as any, e.target.value)}
+                  value={formData.robotImage1 || ''}
+                  onChange={(e) => updateField("robotImage1", e.target.value)}
                   placeholder="https://your-image-url.com/robot1.jpg"
                   className="mt-2 bg-background/50 font-mono text-sm"
                 />
@@ -491,8 +492,8 @@ const Settings = ({ schoolId }: SettingsProps) => {
               <div>
                 <Label>Robot Image 2 URL</Label>
                 <Input
-                  value={(formData as any).robotImage2 || ''}
-                  onChange={(e) => updateField("robotImage2" as any, e.target.value)}
+                  value={formData.robotImage2 || ''}
+                  onChange={(e) => updateField("robotImage2", e.target.value)}
                   placeholder="https://your-image-url.com/robot2.jpg"
                   className="mt-2 bg-background/50 font-mono text-sm"
                 />
@@ -503,8 +504,8 @@ const Settings = ({ schoolId }: SettingsProps) => {
               <div>
                 <Label>Robot Image 3 URL</Label>
                 <Input
-                  value={(formData as any).robotImage3 || ''}
-                  onChange={(e) => updateField("robotImage3" as any, e.target.value)}
+                  value={formData.robotImage3 || ''}
+                  onChange={(e) => updateField("robotImage3", e.target.value)}
                   placeholder="https://your-image-url.com/robot3.jpg"
                   className="mt-2 bg-background/50 font-mono text-sm"
                 />
