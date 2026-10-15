@@ -25,7 +25,7 @@ const Gallery = () => {
             {config.galleryItems.map((item, index) => (
               <GlassCard key={index} delay={index * 0.05}>
                 <div className="space-y-4">
-                  <div className="w-full aspect-video rounded-lg bg-gradient-to-br from-primary/20 to-accent/20" />
+                  <div className="w-full aspect-video rounded-lg bg-linear-to-br from-primary/20 to-accent/20" />
                   <div>
                     <h3 className="text-lg font-medium">{item.title}</h3>
                     <p className="text-sm text-primary">{item.category}</p>

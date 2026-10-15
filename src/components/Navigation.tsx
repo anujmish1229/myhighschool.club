@@ -113,7 +113,7 @@ const Navigation = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsOpen(false)}
-              className="fixed inset-0 bg-background/80 backdrop-blur-sm md:hidden"
+              className="fixed inset-0 bg-background/80 backdrop-blur-xs md:hidden"
               style={{ top: "72px" }}
             />
 

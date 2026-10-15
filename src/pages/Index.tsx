@@ -212,7 +212,7 @@ const Index = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full bg-secondary/50 border border-border/50 rounded-xl pl-12 pr-4 py-3 text-foreground placeholder:text-foreground/40 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+                    className="w-full bg-secondary/50 border border-border/50 rounded-xl pl-12 pr-4 py-3 text-foreground placeholder:text-foreground/40 focus:outline-hidden focus:ring-2 focus:ring-primary/50 transition-all"
                     placeholder="Your name"
                   />
                 </div>
@@ -236,7 +236,7 @@ const Index = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full bg-secondary/50 border border-border/50 rounded-xl pl-12 pr-4 py-3 text-foreground placeholder:text-foreground/40 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+                    className="w-full bg-secondary/50 border border-border/50 rounded-xl pl-12 pr-4 py-3 text-foreground placeholder:text-foreground/40 focus:outline-hidden focus:ring-2 focus:ring-primary/50 transition-all"
                     placeholder="your@email.com"
                   />
                 </div>
@@ -260,7 +260,7 @@ const Index = () => {
                     onChange={handleChange}
                     required
                     rows={6}
-                    className="w-full bg-secondary/50 border border-border/50 rounded-xl pl-12 pr-4 py-3 text-foreground placeholder:text-foreground/40 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all resize-none"
+                    className="w-full bg-secondary/50 border border-border/50 rounded-xl pl-12 pr-4 py-3 text-foreground placeholder:text-foreground/40 focus:outline-hidden focus:ring-2 focus:ring-primary/50 transition-all resize-none"
                     placeholder="Tell us how we can help..."
                   />
                 </div>

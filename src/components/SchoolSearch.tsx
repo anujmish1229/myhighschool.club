@@ -65,7 +65,7 @@ const SchoolSearch = () => {
             }
           }}
           placeholder="Search for your Ontario high school..."
-          className="w-full bg-background/80 backdrop-blur-sm border-2 border-border/50 rounded-2xl pl-16 pr-6 py-4 text-lg text-foreground placeholder:text-foreground/40 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all shadow-lg relative z-20"
+          className="w-full bg-background/80 backdrop-blur-xs border-2 border-border/50 rounded-2xl pl-16 pr-6 py-4 text-lg text-foreground placeholder:text-foreground/40 focus:outline-hidden focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all shadow-lg relative z-20"
           style={{ pointerEvents: 'auto' }}
         />
       </div>
@@ -73,7 +73,7 @@ const SchoolSearch = () => {
       {isOpen && query.trim() && (
         <>
           {results.length > 0 ? (
-            <div className="absolute z-[100] w-full mt-2 glass border-2 border-border rounded-2xl shadow-2xl max-h-96 overflow-y-auto" style={{ pointerEvents: 'auto' }}>
+            <div className="absolute z-100 w-full mt-2 glass border-2 border-border rounded-2xl shadow-2xl max-h-96 overflow-y-auto" style={{ pointerEvents: 'auto' }}>
               {results.map((school) => (
                 <button
                   key={school.id}
@@ -88,7 +88,7 @@ const SchoolSearch = () => {
               ))}
             </div>
           ) : (
-            <div className="absolute z-[100] w-full mt-2 glass border-2 border-border rounded-2xl shadow-2xl p-6 text-center text-foreground/60" style={{ pointerEvents: 'auto' }}>
+            <div className="absolute z-100 w-full mt-2 glass border-2 border-border rounded-2xl shadow-2xl p-6 text-center text-foreground/60" style={{ pointerEvents: 'auto' }}>
               No schools found for "{query}"
             </div>
           )}

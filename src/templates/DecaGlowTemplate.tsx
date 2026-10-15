@@ -161,9 +161,9 @@ const DecaGlowTemplate = () => {
       : ['Every Wednesday', '3:30 – 4:30 PM'];
 
   return (
-    <div style={cssVars} className="min-h-screen bg-[var(--template-background)] text-slate-900">
+    <div style={cssVars} className="min-h-screen bg-(--template-background) text-slate-900">
       <header
-        className={`fixed inset-x-0 top-0 z-40 bg-[var(--template-primary)] transition-all duration-300 ${
+        className={`fixed inset-x-0 top-0 z-40 bg-(--template-primary) transition-all duration-300 ${
           scrolled ? 'shadow-lg shadow-slate-900/20' : ''
         }`}
       >
@@ -191,7 +191,7 @@ const DecaGlowTemplate = () => {
               </button>
             ))}
             <Button
-              className="rounded-full bg-[var(--template-accent)] px-8 py-2 text-sm font-semibold uppercase tracking-[0.15em] text-white shadow-[0_0_25px_rgba(11,107,181,0.6)] transition hover:bg-[var(--template-primary-light)] hover:shadow-[0_0_35px_rgba(11,107,181,0.8)]"
+              className="rounded-full bg-(--template-accent) px-8 py-2 text-sm font-semibold uppercase tracking-[0.15em] text-white shadow-[0_0_25px_rgba(11,107,181,0.6)] transition hover:bg-(--template-primary-light) hover:shadow-[0_0_35px_rgba(11,107,181,0.8)]"
               onClick={() => scrollToSection('join')}
             >
               Join Us
@@ -206,7 +206,7 @@ const DecaGlowTemplate = () => {
           className="relative flex min-h-screen items-center justify-center px-4 text-center text-white"
         >
           {/* Solid blue gradient background instead of image */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[var(--template-primary-dark)] via-[var(--template-primary)] to-[var(--template-primary-dark)]" />
+          <div className="absolute inset-0 bg-linear-to-b from-(--template-primary-dark) via-(--template-primary) to-(--template-primary-dark)" />
           
           <div className="relative z-10 mx-auto max-w-5xl space-y-8 px-4">
             <h1 className="text-5xl font-bold tracking-tight sm:text-6xl md:text-7xl lg:text-8xl">
@@ -217,7 +217,7 @@ const DecaGlowTemplate = () => {
             </p>
             <div className="flex flex-wrap justify-center gap-4 pt-4">
               <Button
-                className="rounded-full bg-white px-12 py-6 text-lg font-semibold text-[var(--template-primary)] shadow-[0_0_30px_rgba(255,255,255,0.5)] transition hover:bg-slate-50 hover:shadow-[0_0_40px_rgba(255,255,255,0.7)]"
+                className="rounded-full bg-white px-12 py-6 text-lg font-semibold text-(--template-primary) shadow-[0_0_30px_rgba(255,255,255,0.5)] transition hover:bg-slate-50 hover:shadow-[0_0_40px_rgba(255,255,255,0.7)]"
                 onClick={() => scrollToSection('deca')}
               >
                 {config.heroButtonPrimary || 'Learn More'}
@@ -256,7 +256,7 @@ const DecaGlowTemplate = () => {
                 },
               ].map((item) => (
                 <div key={item.title} className="text-center">
-                  <div className="mx-auto mb-6 flex h-32 w-32 items-center justify-center rounded-full bg-[var(--template-primary)] text-white">
+                  <div className="mx-auto mb-6 flex h-32 w-32 items-center justify-center rounded-full bg-(--template-primary) text-white">
                     <item.icon className="h-16 w-16" strokeWidth={1.5} />
                   </div>
                   <h3 className="text-2xl font-bold text-slate-900 mb-4">{item.title}</h3>
@@ -293,13 +293,13 @@ const DecaGlowTemplate = () => {
             ) : (
               <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                 {teamMembers.map((member, idx) => (
-                  <Card key={`${member.name}-${idx}`} className="overflow-hidden border bg-white shadow transition-shadow hover:shadow-xl">
+                  <Card key={`${member.name}-${idx}`} className="overflow-hidden border bg-white shadow-sm transition-shadow hover:shadow-xl">
                     <CardContent className="p-6">
-                      <div className="mx-auto mb-4 flex h-32 w-32 items-center justify-center rounded-full bg-[var(--template-primary)]/10 text-[var(--template-primary)]">
+                      <div className="mx-auto mb-4 flex h-32 w-32 items-center justify-center rounded-full bg-(--template-primary)/10 text-(--template-primary)">
                         <Users className="h-16 w-16" />
                       </div>
                       <h3 className="text-xl font-bold text-center text-slate-900">{member.name}</h3>
-                      <p className="mt-2 text-center text-sm font-semibold uppercase tracking-[0.15em] text-[var(--template-primary)]">
+                      <p className="mt-2 text-center text-sm font-semibold uppercase tracking-[0.15em] text-(--template-primary)">
                         {member.role}
                       </p>
                       <p className="mt-3 text-center text-sm text-slate-600">{member.bio}</p>
@@ -327,13 +327,13 @@ const DecaGlowTemplate = () => {
                   className="border bg-white transition-all duration-300 hover:shadow-xl"
                 >
                   <CardContent className="flex gap-5 p-8">
-                    <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-full bg-[var(--template-primary)]/15 text-[var(--template-primary)]">
+                    <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-(--template-primary)/15 text-(--template-primary)">
                       <achievement.icon className="h-8 w-8" />
                     </div>
                     <div className="space-y-3">
                       <div className="flex items-start justify-between gap-4">
                         <h3 className="text-xl font-bold text-slate-900">{achievement.title}</h3>
-                        <span className="rounded-full bg-[var(--template-primary)]/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.15em] text-[var(--template-primary)]">
+                        <span className="rounded-full bg-(--template-primary)/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.15em] text-(--template-primary)">
                           {achievement.meta}
                         </span>
                       </div>
@@ -344,7 +344,7 @@ const DecaGlowTemplate = () => {
               ))}
             </div>
 
-            <div className="mt-12 rounded-xl border-2 border-[var(--template-primary)]/20 bg-[#E5F2FB] p-10 text-center">
+            <div className="mt-12 rounded-xl border-2 border-(--template-primary)/20 bg-[#E5F2FB] p-10 text-center">
               <h3 className="text-2xl font-bold text-slate-900">Ready to Add Your Name to Our Success Stories?</h3>
               <p className="mt-3 text-lg text-slate-600">
                 Join us and discover your potential in the world of business!
@@ -353,7 +353,7 @@ const DecaGlowTemplate = () => {
           </div>
         </section>
 
-        <section id="join" className="bg-[var(--template-primary)] py-20 text-white">
+        <section id="join" className="bg-(--template-primary) py-20 text-white">
           <div className="container mx-auto max-w-6xl px-4">
             <div className="mx-auto mb-16 max-w-3xl text-center">
               <h2 className="text-4xl font-bold md:text-5xl">Join Our Chapter</h2>
@@ -369,7 +369,7 @@ const DecaGlowTemplate = () => {
                 { icon: Users, title: 'Who Can Join', lines: ['All Students', 'No Experience Needed'] },
                 { icon: Mail, title: 'Contact', lines: ['deca@yourschool.edu', '@yourchapter_deca'] },
               ].map((card) => (
-                <Card key={card.title} className="border border-white/20 bg-white/10 text-center backdrop-blur">
+                <Card key={card.title} className="border border-white/20 bg-white/10 text-center backdrop-blur-sm">
                   <CardContent className="space-y-3 p-6">
                     <card.icon className="mx-auto h-12 w-12 text-white" />
                     <h3 className="text-lg font-semibold uppercase tracking-[0.15em]">{card.title}</h3>
@@ -383,7 +383,7 @@ const DecaGlowTemplate = () => {
               ))}
             </div>
 
-            <div className="mt-12 rounded-xl border-2 border-white/20 bg-white/10 p-8 md:p-10 backdrop-blur">
+            <div className="mt-12 rounded-xl border-2 border-white/20 bg-white/10 p-8 md:p-10 backdrop-blur-sm">
               <h3 className="text-3xl font-bold text-center mb-6">How to Join</h3>
               <div className="space-y-4 text-lg text-white/90">
                 {[
@@ -392,7 +392,7 @@ const DecaGlowTemplate = () => {
                   'Start participating in meetings, competitions, and events!',
                 ].map((step, index) => (
                   <div key={index} className="flex items-start gap-3">
-                    <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-white text-[var(--template-primary)] font-bold">
+                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white text-(--template-primary) font-bold">
                       {index + 1}
                     </span>
                     <p>{step}</p>
@@ -410,7 +410,7 @@ const DecaGlowTemplate = () => {
 
         <section className="bg-white py-20">
           <div className="container mx-auto flex max-w-4xl flex-col items-center gap-6 px-4 text-center">
-            <Users className="h-12 w-12 text-[var(--template-primary)]" />
+            <Users className="h-12 w-12 text-(--template-primary)" />
             <h2 className="text-3xl font-bold text-slate-900 md:text-4xl">
               Ready to elevate {config.clubName || 'our chapter'}?
             </h2>
@@ -419,7 +419,7 @@ const DecaGlowTemplate = () => {
                 'Bring your chapter online, connect members, and streamline competition season with a polished digital HQ.'}
             </p>
             <Button
-              className="rounded-full bg-[var(--template-primary)] px-8 py-3 text-white transition hover:bg-[var(--template-primary-dark)]"
+              className="rounded-full bg-(--template-primary) px-8 py-3 text-white transition hover:bg-(--template-primary-dark)"
               onClick={() => scrollToSection('home')}
             >
               Back to top
@@ -435,7 +435,7 @@ const DecaGlowTemplate = () => {
             <h2 className="text-3xl font-bold text-slate-900 md:text-4xl">Frequently Asked Questions</h2>
             <div className="mt-8 space-y-4">
               {faqs.map((faq, idx) => (
-                <details key={`${faq.question}-${idx}`} className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+                <details key={`${faq.question}-${idx}`} className="rounded-xl border border-slate-200 bg-white p-5 shadow-xs">
                   <summary className="cursor-pointer text-lg font-semibold text-slate-900">
                     {faq.question}
                   </summary>
@@ -455,7 +455,7 @@ const DecaGlowTemplate = () => {
               {galleryItems.map((item, idx) => (
                 <span
                   key={`${item.title}-${idx}`}
-                  className="rounded-full border border-[var(--template-primary)]/20 bg-[var(--template-primary)]/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-[var(--template-primary)]"
+                  className="rounded-full border border-(--template-primary)/20 bg-(--template-primary)/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-(--template-primary)"
                 >
                   {item.category}: {item.title}
                 </span>
