@@ -6,7 +6,7 @@
 Student club leaders picked their school, chose a template and filled in a guided setup wizard.
 Each club got a public site at `myhighschool.club/<school>/<club>`, and a school manager approved it before it went live.
 
-> **Status: archived.** myhighschool.club ran from December 2025 to 2026 and has been wound down.
+> **Ran for a school year and reached 10+ Ontario high schools** (December 2025 – 2026).
 > The code and screenshots remain as a record of the project.
 
 ![Landing page](docs/screenshots/landing.png)
@@ -30,7 +30,7 @@ Each club got a public site at `myhighschool.club/<school>/<club>`, and a school
 
 ## My role
 
-I founded the project and led development: product design, the React front end, the Supabase schema and Row Level Security policies, the school/manager approval workflow, and deployment. See [Contributors](#contributors) for the rest of the team.
+**Co-founder, deployment lead and full-stack developer.** I built the React front end, the Supabase schema and Row Level Security policies, and the school/manager approval workflow, and I ran deployment on Netlify and Supabase. See [Contributors](#contributors) for the rest of the team.
 
 ## Architecture
 
