@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { useAuth } from '@/context/AuthContext';
 import { supabase } from '@/lib/supabase';
 import { getErrorMessage } from '@/lib/utils';
@@ -12,7 +12,7 @@ import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
 import { motion } from 'framer-motion';
 import { PlusCircle, Globe, Settings, LogOut, ExternalLink, Clock, CheckCircle } from 'lucide-react';
-import { Notebook, Lightning, UsersThree, ShieldCheck, ArrowRight } from 'phosphor-react';
+import { Notebook, Lightning, UsersThree, ShieldCheck, ArrowRight } from '@phosphor-icons/react';
 import RotatingEarth from '@/components/RotatingEarth';
 import { ontarioSchools, searchSchools } from '@/data/ontarioSchools';
 import type { School as HighSchool } from '@/data/ontarioSchools';

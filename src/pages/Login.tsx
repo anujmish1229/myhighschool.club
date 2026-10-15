@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { useAuth } from '@/context/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { motion } from 'framer-motion';
 import { toast } from 'sonner';
 import RotatingEarth from '@/components/RotatingEarth';
-import { ArrowLeft, GoogleLogo, ShieldCheck } from 'phosphor-react';
+import { ArrowLeft, GoogleLogo, ShieldCheck } from '@phosphor-icons/react';
 
 export default function Login() {
   const { signInWithGoogle, user, loading } = useAuth();

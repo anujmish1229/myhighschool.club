@@ -3,7 +3,7 @@ import { NavLink } from "./NavLink";
 import { List, X } from "@phosphor-icons/react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useConfig } from "@/context/ConfigContext";
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 
 const navItems = [
   { name: "Home", path: "" },

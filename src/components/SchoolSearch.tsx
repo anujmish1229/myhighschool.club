@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
-import { MagnifyingGlass } from "phosphor-react";
+import { useNavigate } from "react-router";
+import { MagnifyingGlass } from "@phosphor-icons/react";
 import { searchSchools, School } from "@/data/ontarioSchools";
 
 const SchoolSearch = () => {

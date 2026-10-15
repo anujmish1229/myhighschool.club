@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import { WebsiteConfig, defaultConfig } from "@/types/config";
 import { useConfig } from "@/context/ConfigContext";

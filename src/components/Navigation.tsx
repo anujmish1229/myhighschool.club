@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { List, X, LockKey } from "phosphor-react";
+import { List, X, LockKey } from "@phosphor-icons/react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Sparkle, Users, Rocket, Heart, EnvelopeSimple, User, ChatCircleText, PaperPlaneTilt } from "phosphor-react";
+import { Sparkle, Users, Rocket, Heart, EnvelopeSimple, User, ChatCircleText, PaperPlaneTilt } from "@phosphor-icons/react";
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import Footer from "@/components/Footer";

@@ -1,9 +1,9 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link } from "react-router";
 import { getSchoolBySlug } from "@/data/ontarioSchools";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { House, UsersThree, Calendar, Book, Sparkle } from "phosphor-react";
+import { House, UsersThree, Calendar, Book, Sparkle } from "@phosphor-icons/react";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
