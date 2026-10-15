@@ -115,7 +115,7 @@ export default function EditSchool({ isSetup = false }: EditSchoolProps) {
         <Button
           onClick={() => navigate('/dashboard')}
           variant="ghost"
-          className="glass flex w-fit items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm text-foreground/80 shadow-lg backdrop-blur hover:bg-white/20 hover:text-foreground"
+          className="glass flex w-fit items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm text-foreground/80 shadow-lg backdrop-blur-sm hover:bg-white/20 hover:text-foreground"
         >
           <ArrowLeft size={18} weight="bold" />
           Back to dashboard

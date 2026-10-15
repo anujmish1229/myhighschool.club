@@ -56,7 +56,7 @@ const SectionCard = ({
     onOpenChange={onToggle}
     className="w-full"
   >
-    <Card className="border-white/10 bg-white/5 backdrop-blur">
+    <Card className="border-white/10 bg-white/5 backdrop-blur-sm">
       <CollapsibleTrigger asChild>
         <CardHeader className="cursor-pointer hover:bg-white/5 transition-colors">
           <div className="flex items-center justify-between">
@@ -888,7 +888,7 @@ const Settings = ({ schoolId }: SettingsProps) => {
         </div>
 
         {/* Danger Zone */}
-        <Card className="border-destructive/50 bg-destructive/5 backdrop-blur">
+        <Card className="border-destructive/50 bg-destructive/5 backdrop-blur-sm">
           <CardHeader>
             <CardTitle className="text-xl font-semibold text-destructive">
               Danger Zone

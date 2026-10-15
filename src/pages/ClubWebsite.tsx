@@ -110,7 +110,7 @@ export default function ClubWebsite() {
           </div>
           <Button
             onClick={() => navigate('/')}
-            className="glass flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-6 py-3 text-sm font-semibold text-foreground/80 shadow-lg backdrop-blur hover:bg-white/20 hover:text-foreground"
+            className="glass flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-6 py-3 text-sm font-semibold text-foreground/80 shadow-lg backdrop-blur-sm hover:bg-white/20 hover:text-foreground"
           >
             <ArrowLeft size={18} weight="bold" />
             Return to homepage
@@ -147,7 +147,7 @@ export default function ClubWebsite() {
           </div>
           <Button
             onClick={() => navigate('/')}
-            className="glass flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-6 py-3 text-sm font-semibold text-foreground/80 shadow-lg backdrop-blur hover:bg-white/20 hover:text-foreground"
+            className="glass flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-6 py-3 text-sm font-semibold text-foreground/80 shadow-lg backdrop-blur-sm hover:bg-white/20 hover:text-foreground"
           >
             <ArrowLeft size={18} weight="bold" />
             Back to homepage

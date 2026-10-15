@@ -78,7 +78,7 @@ const SchoolHome = () => {
 
       {/* Hero Section */}
       <section
-        className="relative min-h-[60vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-primary/10 via-background to-secondary/10 mt-20"
+        className="relative min-h-[60vh] flex items-center justify-center overflow-hidden bg-linear-to-br from-primary/10 via-background to-secondary/10 mt-20"
       >
         <div className="absolute inset-0 bg-grid-pattern opacity-5 mt-20"></div>
         

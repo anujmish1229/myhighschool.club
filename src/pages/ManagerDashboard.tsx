@@ -173,7 +173,7 @@ export default function ManagerDashboard() {
       </div>
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute -top-20 -left-32 h-96 w-96 rounded-full bg-primary/30 blur-3xl" />
-        <div className="absolute bottom-10 right-10 h-[22rem] w-[22rem] rounded-full bg-accent/20 blur-3xl" />
+        <div className="absolute bottom-10 right-10 h-88 w-88 rounded-full bg-accent/20 blur-3xl" />
         <div className="absolute top-1/2 left-1/2 h-64 w-64 -translate-x-1/2 rounded-full bg-blue-500/10 blur-3xl" />
       </div>
     </>
@@ -181,7 +181,7 @@ export default function ManagerDashboard() {
 
   if (authLoading || loading) {
     return (
-      <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 px-4 py-16">
+      <div className="relative min-h-screen overflow-hidden bg-linear-to-br from-slate-950 via-slate-900 to-blue-950 px-4 py-16">
         <Background />
         <div className="relative z-10 mx-auto flex max-w-md flex-col items-center gap-6 rounded-3xl border border-white/10 bg-white/5 p-10 text-center shadow-2xl backdrop-blur-xl">
           <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/20 text-primary">
@@ -200,7 +200,7 @@ export default function ManagerDashboard() {
 
   if (managedSchools.length === 0) {
     return (
-      <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 px-4 py-16">
+      <div className="relative min-h-screen overflow-hidden bg-linear-to-br from-slate-950 via-slate-900 to-blue-950 px-4 py-16">
         <Background />
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -230,7 +230,7 @@ export default function ManagerDashboard() {
   }
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 px-4 py-16 sm:px-6">
+    <div className="relative min-h-screen overflow-hidden bg-linear-to-br from-slate-950 via-slate-900 to-blue-950 px-4 py-16 sm:px-6">
       <Background />
 
       <div className="relative z-20 mx-auto flex w-full max-w-6xl flex-col gap-10">
