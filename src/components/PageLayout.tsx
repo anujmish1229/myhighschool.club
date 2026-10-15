@@ -26,13 +26,13 @@ export const PageLayout = ({ children }: PageLayoutProps) => {
     const primaryHsl = hexToHsl(primaryHex);
     const accentHsl = hexToHsl(accentHex);
 
-    const style: CSSProperties = {};
+    const style = {} as CSSProperties & Record<`--${string}`, string>;
 
-    style['--primary' as any] = primaryHsl;
-    style['--accent' as any] = accentHsl;
-    style['--primary-foreground' as any] = getReadableForegroundHsl(primaryHex);
-    style['--accent-foreground' as any] = getReadableForegroundHsl(accentHex);
-    style['--gradient-accent' as any] = createAccentGradient(primaryHsl, accentHsl);
+    style['--primary'] = primaryHsl;
+    style['--accent'] = accentHsl;
+    style['--primary-foreground'] = getReadableForegroundHsl(primaryHex);
+    style['--accent-foreground'] = getReadableForegroundHsl(accentHex);
+    style['--gradient-accent'] = createAccentGradient(primaryHsl, accentHsl);
 
     return style;
   }, [config.primaryColor, config.accentColor]);

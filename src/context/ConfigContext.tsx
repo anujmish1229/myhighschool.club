@@ -113,7 +113,7 @@ export const ConfigProvider = ({ children }: { children: ReactNode }) => {
     const idToUpdate = schoolIdParam || schoolId;
     if (idToUpdate) {
       try {
-        const updateData: any = {
+        const updateData: { config: WebsiteConfig; updated_at: string; template_id?: string } = {
           config: newConfig,
           updated_at: new Date().toISOString()
         };

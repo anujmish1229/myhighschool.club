@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
+import type { WebsiteConfig } from '@/types/config';
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || '';
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
@@ -19,7 +20,7 @@ export type Database = {
           high_school_slug: string;
           club_slug: string;
           template_id: string;
-          config: any;
+          config: Partial<WebsiteConfig>;
           created_at: string;
           updated_at: string;
           status: 'pending' | 'approved';
@@ -30,7 +31,7 @@ export type Database = {
           high_school_slug: string;
           club_slug: string;
           template_id: string;
-          config: any;
+          config: Partial<WebsiteConfig>;
           created_at?: string;
           updated_at?: string;
           status?: 'pending' | 'approved';
@@ -41,7 +42,7 @@ export type Database = {
           high_school_slug?: string;
           club_slug?: string;
           template_id?: string;
-          config?: any;
+          config?: Partial<WebsiteConfig>;
           created_at?: string;
           updated_at?: string;
           status?: 'pending' | 'approved';
@@ -53,7 +54,7 @@ export type Database = {
           name: string;
           description: string;
           preview_image?: string;
-          default_config: any;
+          default_config: Partial<WebsiteConfig>;
           created_at: string;
         };
         Insert: {
@@ -61,7 +62,7 @@ export type Database = {
           name: string;
           description: string;
           preview_image?: string;
-          default_config: any;
+          default_config: Partial<WebsiteConfig>;
           created_at?: string;
         };
         Update: {
@@ -69,7 +70,7 @@ export type Database = {
           name?: string;
           description?: string;
           preview_image?: string;
-          default_config?: any;
+          default_config?: Partial<WebsiteConfig>;
           created_at?: string;
         };
       };

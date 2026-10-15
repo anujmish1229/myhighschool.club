@@ -40,6 +40,12 @@ export interface WebsiteConfig {
   
   // Calendar Events
   events: CalendarEvent[];
+
+  // Robotics template images (optional; template falls back to defaults)
+  heroImage?: string;
+  robotImage1?: string;
+  robotImage2?: string;
+  robotImage3?: string;
 }
 
 export interface TeamMember {
