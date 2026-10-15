@@ -32,6 +32,7 @@ create table if not exists public.school_managers (
   id uuid primary key default gen_random_uuid(),
   high_school_slug text not null,
   manager_email text not null,
+  created_by uuid references auth.users (id),
   created_at timestamptz not null default now(),
   unique (high_school_slug, manager_email)
 );
