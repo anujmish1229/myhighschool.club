@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router';
 import { motion } from 'framer-motion';
-import { ArrowLeft, ShieldCheck } from 'phosphor-react';
+import { ArrowLeft, ShieldCheck } from '@phosphor-icons/react';
 import { useAuth } from '@/context/AuthContext';
 import { useConfig } from '@/context/ConfigContext';
 import { supabase } from '@/lib/supabase';

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { useParams, Routes, Route, Navigate, useNavigate } from 'react-router';
 import { useConfig } from '@/context/ConfigContext';
 import { getSchoolBySlug } from '@/data/ontarioSchools';
 import ClubHome from './ClubHome';
@@ -10,7 +10,7 @@ import FAQ from './FAQ';
 import Announcements from './Announcements';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
-import { Compass, ArrowLeft, ShieldCheck } from 'phosphor-react';
+import { Compass, ArrowLeft, ShieldCheck } from '@phosphor-icons/react';
 import DecaGlowTemplate from '@/templates/DecaGlowTemplate';
 import RoboticsTemplate from '@/templates/RoboticsTemplate';
 

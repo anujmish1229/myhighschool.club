@@ -1,7 +1,7 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
-import { Compass, ArrowLeft } from "phosphor-react";
+import { Compass, ArrowLeft } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
 
 const NotFound = () => {
