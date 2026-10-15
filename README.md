@@ -6,7 +6,7 @@
 Student club leaders picked their school, chose a template and filled in a guided setup wizard.
 Each club got a public site at `myhighschool.club/<school>/<club>`, and a school manager approved it before it went live.
 
-> **Ran for a school year and reached 10+ Ontario high schools** (December 2025 – 2026).
+> **Ran for a school year and reached 10+ Ontario high schools** (July 2025 – 2026).
 > The code and screenshots remain as a record of the project.
 
 ![Landing page](docs/screenshots/landing.png)
