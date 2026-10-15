@@ -3,14 +3,15 @@
 [![CI](https://github.com/anujmish1229/myhighschool.club/actions/workflows/ci.yml/badge.svg)](https://github.com/anujmish1229/myhighschool.club/actions/workflows/ci.yml)
 
 **Club websites for Ontario high schools, built in minutes.**
-Student club leaders pick their school, choose a template and fill in a guided setup wizard.
-Their club gets a public site at `myhighschool.club/<school>/<club>`, and a school manager approves it before it goes live.
+Student club leaders picked their school, chose a template and filled in a guided setup wizard.
+Each club got a public site at `myhighschool.club/<school>/<club>`, and a school manager approved it before it went live.
 
-**Live:** [myhighschool.club](https://myhighschool.club)
+> **Status: archived.** myhighschool.club ran from December 2025 to 2026 and has been wound down.
+> The code and screenshots remain as a record of the project.
 
 ![Landing page](docs/screenshots/landing.png)
 
-## Who it's for
+## Who it was for
 
 - **Club leaders** who want a real website without writing code or paying for hosting.
 - **Schools** that want every club listed in one place, with staff deciding what gets published.
