@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 import { supabase } from '@/lib/supabase';
+import { getErrorMessage } from '@/lib/utils';
+import type { WebsiteConfig } from '@/types/config';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -21,7 +23,7 @@ interface School {
   high_school_slug: string;
   club_slug: string;
   template_id: string;
-  config: any;
+  config: Partial<WebsiteConfig>;
   created_at: string;
   updated_at: string;
   status: 'pending' | 'approved';
@@ -32,7 +34,7 @@ interface Template {
   name: string;
   description: string;
   preview_image?: string;
-  default_config: any;
+  default_config: Partial<WebsiteConfig>;
 }
 
 export default function Dashboard() {
@@ -83,8 +85,8 @@ export default function Dashboard() {
 
       if (error) throw error;
       setSchools(data || []);
-    } catch (error: any) {
-      toast.error('Failed to fetch schools: ' + error.message);
+    } catch (error) {
+      toast.error('Failed to fetch schools: ' + getErrorMessage(error));
     } finally {
       setLoading(false);
     }
@@ -102,8 +104,8 @@ export default function Dashboard() {
       if (data && data.length > 0) {
         setSelectedTemplate(data[0].id);
       }
-    } catch (error: any) {
-      toast.error('Failed to fetch templates: ' + error.message);
+    } catch (error) {
+      toast.error('Failed to fetch templates: ' + getErrorMessage(error));
     }
   };
 
@@ -160,11 +162,11 @@ export default function Dashboard() {
       setNewClubSlug('');
       setSelectedHighSchool(null);
       setSchoolSearchQuery('');
-    } catch (error: any) {
-      if (error.code === '23505') {
+    } catch (error) {
+      if ((error as { code?: string }).code === '23505') {
         toast.error('This club already exists at this school. Please choose another name.');
       } else {
-        toast.error('Failed to create club: ' + error.message);
+        toast.error('Failed to create club: ' + getErrorMessage(error));
       }
     } finally {
       setCreating(false);
